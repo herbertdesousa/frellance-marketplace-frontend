@@ -1,0 +1,39 @@
+.item-measures {
+  width: 128px;
+  height: 128px;
+  min-width: 128px;
+  min-height: 128px;
+}
+
+.item-place-measures {
+  width: 128px;
+  min-width: 128px;
+}
+
+@media (min-width: 768px) {
+  .item-measures {
+    width: 192px;
+    height: 192px;
+    min-width: 192px;
+    min-height: 192px;
+  }
+
+  .item-place-measures {
+    width: 192px;
+    min-width: 192px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .item-measures {
+    width: 208px;
+    height: 208px;
+    min-width: 208px;
+    min-height: 208px;
+  }
+
+  .item-place-measures {
+    width: 208px;
+    min-width: 208px;
+  }
+}

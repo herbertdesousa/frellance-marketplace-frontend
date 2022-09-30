@@ -1,0 +1,31 @@
+.root {
+  @apply fixed top-0 w-64 h-screen bg-white z-50
+}
+.root-right-open {
+  right: 0;
+  transition: all 100ms linear;
+}
+.root-right-close {
+  right: -256px;
+  transition: all 100ms linear;
+}
+.root-left-open {
+  left: 0;
+  transition: all 100ms linear;
+}
+.root-left-close {
+  left: -256px;
+  transition: all 100ms linear;
+}
+
+.bg {
+  @apply fixed top-0 w-screen h-screen bg-black-opaque z-40
+}
+.root-open {
+  opacity: 1;
+  transition: all 100ms linear;
+}
+.root-close {
+  opacity: 0;
+  transition: all 100ms linear;
+}
