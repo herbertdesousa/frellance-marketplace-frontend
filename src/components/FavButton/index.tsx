@@ -32,47 +32,46 @@ const FavButton: Page<{ id: string }> = ({ id }) => {
   const isAddAnimationRunning = isFavorited && seconds !== 0;
 
   return (
-    <div className="absolute -top-2" style={{ right: 28 + 8 }}>
-      <button
-        type="button"
-        className="relative z-40 transition"
+    <button
+      type="button"
+      className="absolute z-40 transition top-2"
+      style={{
+        transform: `translate(${isAddAnimationRunning ? '-70px' : '0px'}, 0)`,
+        right: 28 + 8,
+      }}
+      onClick={onClick}
+    >
+      <div
+        className={`absolute bg-white transition ${
+          isAddAnimationRunning ? 'rounded-sm' : 'rounded-full'
+        }`}
         style={{
-          transform: `translate(${isAddAnimationRunning ? '-70px' : '0px'}, 0)`,
+          width: 28,
+          height: 28,
+          transform: `scale(${isAddAnimationRunning ? '3.5' : '1'}, 1)`,
+          transformOrigin: '0% 100%',
         }}
-        onClick={onClick}
-      >
-        <div
-          className={`absolute bg-white transition ${
-            isAddAnimationRunning ? 'rounded-sm' : 'rounded-full'
-          }`}
-          style={{
-            width: 28,
-            height: 28,
-            transform: `scale(${isAddAnimationRunning ? '3.5' : '1'}, 1)`,
-            transformOrigin: '0% 100%',
-          }}
-        />
+      />
 
-        <div className="absolute top-1.5 left-1.5 z-20">
-          <div className="flex">
-            {!isFavorited && <MdFavoriteBorder size={16} />}
-            {isFavorited && <MdFavorite size={16} />}
-            <span
-              className={`
+      <div className="absolute top-1.5 left-1.5 z-20">
+        <div className="flex">
+          {!isFavorited && <MdFavoriteBorder size={16} />}
+          {isFavorited && <MdFavorite size={16} />}
+          <span
+            className={`
                 text-xs ml-2 transition
                 ${
                   isAddAnimationRunning
-                    ? 'opacity-100 delay-75 duration-200'
-                    : 'opacity-0 duration-75'
+                    ? 'block opacity-100 delay-75 duration-200'
+                    : 'hidden opacity-0 duration-75'
                 }
               `}
-            >
-              Adicionado
-            </span>
-          </div>
+          >
+            Adicionado
+          </span>
         </div>
-      </button>
-    </div>
+      </div>
+    </button>
   );
 };
 

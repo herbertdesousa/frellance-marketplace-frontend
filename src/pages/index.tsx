@@ -1,18 +1,18 @@
 import { Page } from '@/types/Page';
 
-import { Nav } from '@/components';
 import {
   HomeCategories,
   HomeFeatures,
   HomeFooter,
   HomeHero,
+  HomeNav,
   HomeSellWithUs,
 } from '@/modules/Home';
 
 const Home: Page = () => {
   return (
     <>
-      <Nav />
+      <HomeNav />
       <HomeHero />
       <HomeCategories />
       <HomeFeatures />

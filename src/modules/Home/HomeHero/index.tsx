@@ -70,12 +70,16 @@ const HomeHero: Page = () => {
   );
 
   return (
-    <header className="relative" style={{ height: 'calc(100vh - 64px)' }}>
+    <header
+      className="relative w-screen"
+      style={{ height: 'calc(100vh - 64px)' }}
+    >
       <Image
         src={selectedBgCarrousel?.img || ''}
         layout="fill"
         objectFit="cover"
-        className="brightness-50"
+        style={{ filter: 'brightness(0.3)' }}
+        priority
       />
 
       <div
