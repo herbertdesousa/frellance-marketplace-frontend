@@ -9,10 +9,9 @@ import classNames from 'classnames';
 
 import style from './SideMenu.module.css';
 
-export interface ISideMenuRef {
+export interface SideMenuRef {
   open(): void;
   close(): void;
-  toggle(): void;
 }
 
 interface IProps {
@@ -21,7 +20,7 @@ interface IProps {
   side?: 'left' | 'right';
 }
 
-const SideMenu: React.ForwardRefRenderFunction<ISideMenuRef, IProps> = (
+const SideMenu: React.ForwardRefRenderFunction<SideMenuRef, IProps> = (
   { className, children, side = 'left' },
   ref,
 ) => {
@@ -49,10 +48,6 @@ const SideMenu: React.ForwardRefRenderFunction<ISideMenuRef, IProps> = (
     },
     close() {
       closeSideMenu();
-    },
-    toggle() {
-      if (isOpened) closeSideMenu();
-      else openSideMenu();
     },
   }));
 

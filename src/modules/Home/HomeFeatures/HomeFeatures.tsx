@@ -2,6 +2,8 @@ import { Page } from '@/types/Page';
 
 import Image from 'next/image';
 
+import { useRouter } from 'next/router';
+
 import { FavButton } from '@/components';
 import style from './HomeFeatures.module.css';
 
@@ -69,6 +71,8 @@ const featuresData = [
 ];
 
 const HomeFeatures: Page = () => {
+  const router = useRouter();
+
   return (
     <div className="mx-auto mt-12 md:mt-16 lg:mt-32" style={{ maxWidth: 1440 }}>
       <h1 className="text-2xl font-merriweather font-bold ml-6 md:ml-16">
@@ -77,13 +81,7 @@ const HomeFeatures: Page = () => {
 
       <ul className="flex overflow-x-scroll no-scroll px-6 mt-6 md:px-16">
         {featuresData.map((item, index) => (
-          <li
-            key={item.id}
-            className={`
-              relative
-              ${index !== 0 ? 'ml-4' : ''}
-            `}
-          >
+          <li key={item.id} className={`relative ${index !== 0 ? 'ml-4' : ''}`}>
             <FavButton id={item.id} />
             <button type="button" className="text-left hover:underline">
               <div
@@ -108,6 +106,23 @@ const HomeFeatures: Page = () => {
             </button>
           </li>
         ))}
+
+        <li className="ml-4 relative">
+          <button
+            type="button"
+            className="flex text-left hover:underline"
+            onClick={() => router.push('/itens')}
+          >
+            <div
+              className={`
+                relative ${style['item-measures']} overflow-hidden
+                border border-dashed border-gray2 flex items-center justify-center
+              `}
+            >
+              <span>Ver Mais Itens</span>
+            </div>
+          </button>
+        </li>
       </ul>
     </div>
   );

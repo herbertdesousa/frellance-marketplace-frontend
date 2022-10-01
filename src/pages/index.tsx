@@ -1,20 +1,20 @@
 import { Page } from '@/types/Page';
 
 import {
-  HomeCategories,
   HomeFeatures,
   HomeFooter,
   HomeHero,
   HomeNav,
   HomeSellWithUs,
 } from '@/modules/Home';
+import { CategoriesCarrousel } from '@/modules/shared';
 
 const Home: Page = () => {
   return (
     <>
       <HomeNav />
       <HomeHero />
-      <HomeCategories />
+      <CategoriesCarrousel className="mt-12" />
       <HomeFeatures />
       <HomeSellWithUs />
       <HomeFooter />
