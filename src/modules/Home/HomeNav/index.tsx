@@ -5,11 +5,13 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { useDetectClickOutside } from 'react-detect-click-outside';
 
 import { useCategories } from '@/hooks/categories';
+import { useRouter } from 'next/router';
 
 import { Nav } from '@/components';
 
 const HomeNav: Page = () => {
   const categories = useCategories();
+  const router = useRouter();
 
   const [isOpenedCategoriesMobile, setIsOpenedCategoriesMobile] =
     useState(false);
@@ -57,9 +59,10 @@ const HomeNav: Page = () => {
                         <button
                           type="button"
                           className={`
-                        flex items-center py-2 px-4 bg-white hover:bg-gray0.5 w-full transition
-                        ${index === 0 ? '' : 'mt-2'}
-                      `}
+                            flex items-center py-2 px-4 bg-white hover:bg-gray0.5 w-full transition
+                            ${index === 0 ? '' : 'mt-2'}
+                          `}
+                          onClick={() => router.push(item.link)}
                         >
                           <item.icon size={16} className="mr-4" />
                           {item.label}
@@ -71,21 +74,18 @@ const HomeNav: Page = () => {
             </li>
 
             <ul className="hidden md:flex">
-              <li className="hover:text-gray1 transition mr-3">
-                <button type="button">carros</button>
-              </li>
-              <li className="hover:text-gray1 transition mr-3">
-                <button type="button">casas</button>
-              </li>
-              <li className="hover:text-gray1 transition mr-3">
-                <button type="button">relógios</button>
-              </li>
-              <li className="hover:text-gray1 transition mr-3">
-                <button type="button">iates</button>
-              </li>
-              <li className="hover:text-gray1 transition">
-                <button type="button">helicópteros</button>
-              </li>
+              {categories.data.map((item, index) => (
+                <li
+                  key={item.id}
+                  className={`hover:text-gray1 transition ${
+                    index === 0 ? '' : 'ml-3'
+                  }`}
+                >
+                  <button type="button" onClick={() => router.push(item.link)}>
+                    {item.label.toLocaleLowerCase()}
+                  </button>
+                </li>
+              ))}
             </ul>
           </ul>
         </div>

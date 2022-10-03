@@ -1,9 +1,11 @@
 import { Page } from '@/types/Page';
 
 import { useCategories } from '@/hooks/categories';
+import { useRouter } from 'next/router';
 
 const HomeFooter: Page = () => {
   const categories = useCategories();
+  const router = useRouter();
 
   return (
     <footer className="w-full px-6 py-6 md:px-16 bg-black">
@@ -15,6 +17,7 @@ const HomeFooter: Page = () => {
               <button
                 type="button"
                 className="flex items-center text-gray2 hover:text-white transition"
+                onClick={() => router.push(item.link)}
               >
                 <item.icon size={16} className="mr-2" />
                 {item.label}
