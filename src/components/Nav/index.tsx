@@ -19,10 +19,7 @@ const Nav: Page<Props> = ({ children, variant = 'transparent' }) => {
         ${variant === 'white' ? 'bg-white' : 'bg-transparent'}
       `}
     >
-      <div
-        className="flex mx-auto items-center justify-between px-6 py-5 md:px-16"
-        style={{ maxWidth: 1440 }}
-      >
+      <div className="flex items-center justify-between py-5 max-width">
         <div className="flex items-center">
           <button
             type="button"

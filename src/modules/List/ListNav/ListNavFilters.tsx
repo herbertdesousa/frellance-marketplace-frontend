@@ -5,10 +5,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 const ListNavFilters: Page = () => {
   return (
     <div className="w-full border-t border-b border-gray0.5">
-      <ul
-        className="flex overflow-y-scroll no-scroll px-6 py-2 md:px-16 mx-auto"
-        style={{ maxWidth: 1440 }}
-      >
+      <ul className="flex overflow-y-scroll no-scroll py-2 max-width">
         {['Ano', 'Preço', 'Quilometragem', 'Combústivel'].map((item, index) => (
           <li key={item} className={index > 0 ? 'ml-2' : ''}>
             <button

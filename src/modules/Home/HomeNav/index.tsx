@@ -26,10 +26,7 @@ const HomeNav: Page = () => {
     <>
       <Nav variant="transparent">
         <div className="w-full border-t border-b border-gray3">
-          <ul
-            className="flex mx-auto items-center text-xs text-white px-6 py-2 md:px-16 md:text-sm"
-            style={{ maxWidth: 1440 }}
-          >
+          <ul className="flex items-center text-xs text-white py-2 md:text-sm max-width">
             <li className="mr-3 hover:text-gray1 transition">
               <button type="button">para você</button>
             </li>

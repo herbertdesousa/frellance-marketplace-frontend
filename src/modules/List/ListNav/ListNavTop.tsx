@@ -9,15 +9,12 @@ const ListNavTop: Page = () => {
   const { sideMenuRef } = useSideMenu();
 
   return (
-    <div
-      className="flex mx-auto items-center justify-between px-6 py-5 md:px-16"
-      style={{ maxWidth: 1440 }}
-    >
+    <div className="flex items-center justify-between py-5 max-width">
       <Link href="/">
         <div className="w-12 h-12 bg-gray3 rounded" />
       </Link>
 
-      <div className="h-12 mx-6 p-3 flex flex-1 bg-gray1 max-w-xs">
+      <div className="h-12 mx-6 p-3 flex flex-1 bg-gray0.5 max-w-xs">
         <MdSearch size={24} />
         <input
           type="text"

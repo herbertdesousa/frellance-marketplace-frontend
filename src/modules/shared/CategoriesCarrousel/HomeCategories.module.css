@@ -22,3 +22,9 @@
     min-height: 336px;
   }
 }
+
+@media (min-width: 1440px) {
+  .carrousel-wrapper {
+    @apply justify-center
+  }
+}

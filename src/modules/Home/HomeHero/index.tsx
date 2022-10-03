@@ -82,10 +82,7 @@ const HomeHero: Page = () => {
         priority
       />
 
-      <div
-        className="absolute mx-auto bottom-0 left-0 right-0 px-6 md:px-16"
-        style={{ maxWidth: 1440 }}
-      >
+      <div className="absolute bottom-0 left-0 right-0 max-width">
         <h1 className="font-merriweather text-2xl text-white font-bold md:text-3xl lg:text-4xl">
           Mais Luxuosos
           <br />

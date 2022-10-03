@@ -14,20 +14,19 @@ const HomeCategories: Page<{ className?: string }> = ({ className }) => {
   const router = useRouter();
 
   return (
-    <div
-      className={`mx-auto md:mt-16 lg:mt-24 ${className}`}
-      style={{ maxWidth: 1440 }}
-    >
-      <h1 className="text-2xl font-merriweather font-bold ml-6 md:ml-16">
+    <div className={`md:mt-16 lg:mt-24 max-width ${className}`}>
+      <h1 className="text-2xl font-merriweather font-bold">
         Pricípais Categorias
       </h1>
 
-      <ul className="flex overflow-x-scroll no-scroll px-6 mt-6 md:px-16">
+      <ul
+        className={`flex overflow-x-scroll no-scroll mt-6 ${style['carrousel-wrapper']}`}
+      >
         {categories.data.map((item, index) => (
           <li key={item.id}>
             <button
               type="button"
-              onClick={() => router.push(`/itens/${item.label}`)}
+              onClick={() => router.push(item.link)}
               className={`
               relative ${style['item-measures']}
               ${index !== 0 ? 'ml-4' : ''}

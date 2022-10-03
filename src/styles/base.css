@@ -64,3 +64,14 @@ body::-webkit-scrollbar {
 .no-scroll::-webkit-scrollbar {
   display: none;
 }
+
+.max-width {
+  @apply px-6 md:px-16
+}
+
+@media (min-width: 1440px) {
+  .max-width {
+    width: 1440px;
+    @apply px-0 mx-auto
+  }
+}
