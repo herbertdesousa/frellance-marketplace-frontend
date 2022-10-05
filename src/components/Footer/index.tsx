@@ -2,13 +2,14 @@ import { Page } from '@/types/Page';
 
 import { useCategories } from '@/hooks/categories';
 import { useRouter } from 'next/router';
+import { MdOpenInNew } from 'react-icons/md';
 
 const HomeFooter: Page = () => {
   const categories = useCategories();
   const router = useRouter();
 
   return (
-    <footer className="w-full px-6 py-6 md:px-16 bg-black">
+    <footer className="w-full px-6 py-6 md:px-16 bg-black mt-16">
       <div>
         <strong className="text-gray2">Categorias</strong>
         <ul className="mt-3">
@@ -24,6 +25,17 @@ const HomeFooter: Page = () => {
               </button>
             </li>
           ))}
+
+          <li className="mt-1">
+            <button
+              type="button"
+              className="flex items-center text-gray2 hover:text-white transition"
+              onClick={() => router.push('/itens')}
+            >
+              <MdOpenInNew size={16} className="mr-2" />
+              Mais Itens
+            </button>
+          </li>
         </ul>
       </div>
 

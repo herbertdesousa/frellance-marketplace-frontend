@@ -36,7 +36,7 @@ const HomeSellWithUs: Page = () => {
   );
 
   return (
-    <div className="relative mt-12 md:mt-16 lg:mt-24 w-full h-80 mb-16">
+    <div className="relative mt-12 md:mt-16 lg:mt-24 w-full h-80">
       <Image
         src={selectedCategory?.img || ''}
         layout="fill"

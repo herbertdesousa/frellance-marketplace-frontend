@@ -2,7 +2,7 @@ import { Page } from '@/types/Page';
 import { useRouter } from 'next/router';
 
 import { ListNav } from '@/modules/List';
-import { BreadCrumb } from '@/components';
+import { BreadCrumb, Footer } from '@/components';
 import { ListItem } from '@/modules/shared';
 
 import { capitalizeFirstLetter } from '@/utils';
@@ -84,10 +84,12 @@ const ListSlug: Page = () => {
 
         <ul className="grid gap-x-4 md:grid-cols-2 lg:grid-cols-4">
           {data.map(item => (
-            <ListItem item={item} />
+            <ListItem key={item.id} item={item} />
           ))}
         </ul>
       </div>
+
+      <Footer />
     </>
   );
 };

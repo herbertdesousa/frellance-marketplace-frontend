@@ -1,5 +1,6 @@
 import { Page } from '@/types/Page';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import { FavButton } from '@/components';
 
@@ -21,11 +22,14 @@ const ListItem: Page<Props> = ({
   item,
   imgMeasureType = 'fill',
 }) => {
+  const router = useRouter();
+
   return (
-    <li key={item.id} className={`mb-6 ${className}`}>
+    <li className={`relative mb-6 ${className}`}>
       <button
         type="button"
         className="relative w-full text-left hover:underline"
+        onClick={() => router.push(`/itens/detalhes/${item.id}`)}
       >
         <div
           className={`relative ${
@@ -40,13 +44,13 @@ const ListItem: Page<Props> = ({
           />
         </div>
 
-        <FavButton id={item.id} />
-
         <div className="mt-3">
           <strong>{item.price}</strong>
           <p className="text-gray3">{item.description}</p>
         </div>
       </button>
+
+      <FavButton id={item.id} />
     </li>
   );
 };

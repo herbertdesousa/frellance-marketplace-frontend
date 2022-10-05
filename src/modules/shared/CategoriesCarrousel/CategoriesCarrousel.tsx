@@ -7,9 +7,9 @@ import { useRouter } from 'next/router';
 
 import { useCategories } from '@/hooks/categories';
 
-import style from './HomeCategories.module.css';
+import style from './CategoriesCarrousel.module.css';
 
-const HomeCategories: Page<{ className?: string }> = ({ className }) => {
+const CategoriesCarrousel: Page<{ className?: string }> = ({ className }) => {
   const categories = useCategories();
   const router = useRouter();
 
@@ -55,4 +55,4 @@ const HomeCategories: Page<{ className?: string }> = ({ className }) => {
   );
 };
 
-export default HomeCategories;
+export default CategoriesCarrousel;

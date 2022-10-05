@@ -1,2 +1,2 @@
-export { default } from './HomeCategories';
-export * from './HomeCategories';
+export { default } from './CategoriesCarrousel';
+export * from './CategoriesCarrousel';

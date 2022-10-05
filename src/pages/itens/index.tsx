@@ -2,6 +2,7 @@ import { Page } from '@/types/Page';
 
 import ListNav from '@/modules/List/ListNav';
 import { CategoriesCarrousel, ListItem } from '@/modules/shared';
+import { Footer } from '@/components';
 
 const data = [
   {
@@ -72,10 +73,12 @@ const List: Page = () => {
 
         <ul className="grid gap-x-4 md:grid-cols-2 lg:grid-cols-4">
           {data.map(item => (
-            <ListItem item={item} />
+            <ListItem key={item.id} item={item} />
           ))}
         </ul>
       </div>
+
+      <Footer />
     </>
   );
 };

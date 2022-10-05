@@ -3,7 +3,19 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
 
-const FavButton: Page<{ id: string }> = ({ id }) => {
+interface Props {
+  id: string;
+  iconSize?: 16 | 24;
+  className?: string;
+  containerClassName?: string;
+}
+
+const FavButton: Page<Props> = ({
+  id,
+  iconSize = 16,
+  className,
+  containerClassName,
+}) => {
   const [isFavorited, setIsFavorited] = useState(false);
 
   const [seconds, setSeconds] = useState(0);
@@ -34,7 +46,7 @@ const FavButton: Page<{ id: string }> = ({ id }) => {
   return (
     <button
       type="button"
-      className="absolute z-40 transition top-2"
+      className={`absolute z-40 transition top-2 ${className}`}
       style={{
         transform: `translate(${isAddAnimationRunning ? '-70px' : '0px'}, 0)`,
         right: 28 + 8,
@@ -42,21 +54,24 @@ const FavButton: Page<{ id: string }> = ({ id }) => {
       onClick={onClick}
     >
       <div
-        className={`absolute bg-white transition ${
+        className={`absolute bg-white transition ${containerClassName}  ${
           isAddAnimationRunning ? 'rounded-sm' : 'rounded-full'
         }`}
         style={{
-          width: 28,
-          height: 28,
-          transform: `scale(${isAddAnimationRunning ? '3.5' : '1'}, 1)`,
+          width: 6 + iconSize + 6,
+          height: 6 + iconSize + 6,
+          transform: `scale(${
+            // eslint-disable-next-line no-nested-ternary
+            isAddAnimationRunning ? (iconSize === 16 ? '3.5' : '3') : '1'
+          }, 1)`,
           transformOrigin: '0% 100%',
         }}
       />
 
       <div className="absolute top-1.5 left-1.5 z-20">
-        <div className="flex">
-          {!isFavorited && <MdFavoriteBorder size={16} />}
-          {isFavorited && <MdFavorite size={16} />}
+        <div className="flex items-center">
+          {!isFavorited && <MdFavoriteBorder size={iconSize} />}
+          {isFavorited && <MdFavorite size={iconSize} className="text-red" />}
           <span
             className={`
                 text-xs ml-2 transition

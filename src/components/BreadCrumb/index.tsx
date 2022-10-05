@@ -10,7 +10,7 @@ const BreadCrumb: Page<{ data: Item[] }> = ({ data }) => {
   return (
     <ul className="flex">
       {data.map((item, index, arr) => (
-        <li className="flex items-center">
+        <li key={item.label} className="flex items-center">
           {index !== 0 && (
             <MdChevronRight size={16} className="mx-2 text-gray2" />
           )}
