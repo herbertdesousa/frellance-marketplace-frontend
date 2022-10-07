@@ -41,7 +41,7 @@ const sideMenuBottomData = [
   {
     id: 'id-456',
     label: 'Ver Perfil',
-    link: '/',
+    link: '/perfil/conta',
   },
   {
     id: 'id-789',
@@ -73,8 +73,8 @@ const SideMenuProvider: Page = ({ children }) => {
     },
   }));
 
-  const onClickCategory = useCallback((label: string) => {
-    router.push(`/itens/${label}`);
+  const onClickLink = useCallback((link: string) => {
+    router.push(link);
     currentSideMenuRef.current?.close();
   }, []);
 
@@ -106,7 +106,7 @@ const SideMenuProvider: Page = ({ children }) => {
               <li key={item.id}>
                 <button
                   type="button"
-                  onClick={() => onClickCategory(item.label)}
+                  onClick={() => onClickLink(`/itens/${item.label}`)}
                   className={`
                     flex items-center py-2 px-4 bg-white hover:bg-gray0.5 w-full transition
                     ${index === 0 ? '' : 'mt-2'}
@@ -132,6 +132,7 @@ const SideMenuProvider: Page = ({ children }) => {
                     flex items-center py-2 px-4 bg-white hover:bg-gray0.5 w-full transition
                     ${index === 0 ? '' : 'mt-2'}
                   `}
+                  onClick={() => onClickLink(item.link)}
                 >
                   {item.label}
                 </button>

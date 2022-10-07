@@ -4,19 +4,22 @@ import Link from 'next/link';
 import { MdMenu, MdPersonOutline } from 'react-icons/md';
 
 import { useSideMenu } from '@/hooks/sideMenu';
+import { useRouter } from 'next/router';
 
 interface Props {
   variant?: 'white' | 'transparent';
+  className?: string;
 }
 
-const Nav: Page<Props> = ({ children, variant = 'transparent' }) => {
+const Nav: Page<Props> = ({ children, variant = 'transparent', className }) => {
   const { sideMenuRef } = useSideMenu();
+  const router = useRouter();
 
   return (
     <nav
       className={`
         absolute left-0 right-0 z-30
-        ${variant === 'white' ? 'bg-white' : 'bg-transparent'}
+        ${variant === 'white' ? 'bg-white' : 'bg-transparent'} ${className}
       `}
     >
       <div className="flex items-center justify-between py-5 max-width">
@@ -51,9 +54,17 @@ const Nav: Page<Props> = ({ children, variant = 'transparent' }) => {
                   : 'text-white hover:text-gray1'
               }
             `}
+          onClick={() => router.push('/perfil/conta')}
         >
-          <div className="bg-gray3 rounded-full p-1.5">
-            <MdPersonOutline size={20} className="text-white" />
+          <div
+            className={`rounded-full p-1.5 ${
+              variant === 'white' ? 'border border-gray2' : 'bg-gray3'
+            }`}
+          >
+            <MdPersonOutline
+              size={20}
+              className={variant === 'white' ? 'text-black' : 'text-white'}
+            />
           </div>
           <p className="hidden md:block ml-3">
             olá,
