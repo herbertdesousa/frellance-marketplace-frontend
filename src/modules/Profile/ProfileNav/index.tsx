@@ -22,7 +22,7 @@ const ProfileNav: Page = () => {
     if (itemsRef.current.length === 0) return;
 
     itemsRef.current.map(item => {
-      if (item.link === router.pathname) {
+      if (router.pathname.includes(item.link)) {
         item.ref.scrollIntoView({ block: 'nearest', inline: 'center' });
       }
 
@@ -42,7 +42,11 @@ const ProfileNav: Page = () => {
                 if (ref) itemsRef.current.push({ ref, link: item.link });
               }}
               className={`
-              ${router.pathname === item.link ? 'border-b-2 border-black' : ''}
+              ${
+                router.pathname.includes(item.link)
+                  ? 'border-b-2 border-black'
+                  : ''
+              }
               ${index === 0 ? '' : 'ml-6'}
             `}
             >
@@ -50,7 +54,7 @@ const ProfileNav: Page = () => {
                 type="button"
                 className={`flex items-center py-2 uppercase whitespace-nowrap transition
                 ${
-                  router.pathname === item.link
+                  router.pathname.includes(item.link)
                     ? 'text-black font-medium'
                     : 'text-gray2 font-normal hover:text-gray3'
                 }

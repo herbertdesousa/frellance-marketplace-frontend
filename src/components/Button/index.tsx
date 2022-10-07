@@ -9,7 +9,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: Page<Props> = ({
-  variant = 'filled',
+  variant = 'filled-dark',
   children,
   className,
   ...rest
