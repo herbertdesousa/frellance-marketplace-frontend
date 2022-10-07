@@ -1,18 +1,16 @@
 import { Page } from '@/types/Page';
 
 import { MdMail, MdPhone } from 'react-icons/md';
+import { Button } from '@/components';
 
 const ListDetailsContact: Page = () => {
   return (
     <>
       <div className="block fixed md:hidden left-0 bottom-0 right-0 border-t border-gray1 p-4 bg-white z-50">
-        <button
-          type="button"
-          className="flex justify-center py-4 center w-full bg-black text-white"
-        >
+        <Button variant="filled-dark">
           <MdPhone size={24} className="mr-4" />
-          Entrar em contato
-        </button>
+          COMEÇAR A VENDER
+        </Button>
       </div>
 
       <div className="hidden md:block sticky top-6 mt-6 p-4 border border-gray0.5">

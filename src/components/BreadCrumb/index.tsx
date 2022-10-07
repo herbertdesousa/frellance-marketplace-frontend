@@ -17,11 +17,14 @@ const BreadCrumb: Page<{ data: Item[] }> = ({ data }) => {
           <button
             type="button"
             onClick={item.onClick}
-            className={
-              index === arr.length - 1
-                ? 'font-semibold text-black'
-                : 'font-normal text-gray2'
-            }
+            className={`
+            transition
+              ${
+                index === arr.length - 1
+                  ? 'font-semibold text-black'
+                  : 'font-normal text-gray2 hover:text-gray3'
+              }
+            `}
           >
             {item.label}
           </button>

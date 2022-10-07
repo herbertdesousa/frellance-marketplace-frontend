@@ -1,3 +1,4 @@
+import { Button } from '@/components';
 import { Page } from '@/types/Page';
 
 import Image from 'next/image';
@@ -78,13 +79,10 @@ const HomeSellWithUs: Page = () => {
             {selectedCategory?.description}
           </p>
 
-          <button
-            type="button"
-            className="flex w-full items-center justify-center bg-white h-12 uppercase text-sm font-medium"
-          >
+          <Button variant="filled-light">
             COMEÇAR A VENDER
             <MdArrowForward className="ml-4" />
-          </button>
+          </Button>
         </div>
       </div>
     </div>
