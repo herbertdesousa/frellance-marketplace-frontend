@@ -1,7 +1,10 @@
 import { Page } from '@/types/Page';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProfileNav } from '@/modules/Profile';
+
+import { useAuth } from '@/hooks/auth';
+import { useRouter } from 'next/router';
 
 import {
   ProfileChatContacts,
@@ -10,6 +13,18 @@ import {
 
 const Chat: Page = () => {
   const [navHeight, setNavHeight] = useState(0);
+
+  const auth = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!auth.user && !auth.loading) {
+      auth.authModalRef.current?.open();
+      router.push('/');
+    }
+  }, [auth]);
+
+  if (!auth.user) return <></>;
 
   return (
     <>

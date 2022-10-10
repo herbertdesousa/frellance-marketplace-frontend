@@ -7,9 +7,18 @@ import { ProfileNav } from '@/modules/Profile';
 
 import { ProfileChatContacts } from '@/modules/Profile/ProfileChat';
 import { useEffect } from 'react';
+import { useAuth } from '@/hooks/auth';
 
 const Chat: Page = () => {
   const router = useRouter();
+  const auth = useAuth();
+
+  useEffect(() => {
+    if (!auth.user && !auth.loading) {
+      auth.authModalRef.current?.open();
+      router.push('/');
+    }
+  }, [auth]);
 
   useEffect(() => {
     if (!isMobile) {
@@ -17,6 +26,7 @@ const Chat: Page = () => {
     }
   }, [router]);
 
+  if (!auth.user) return <></>;
   return (
     <>
       <ProfileNav />

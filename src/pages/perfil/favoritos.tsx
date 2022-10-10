@@ -1,9 +1,10 @@
 import { Page } from '@/types/Page';
+import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
+import { useAuth } from '@/hooks/auth';
 
 import { ProfileNav } from '@/modules/Profile';
-import { ListItem } from '@/modules/shared';
 import { MdArrowForward, MdFavoriteBorder } from 'react-icons/md';
 import { Button } from '@/components';
 
@@ -60,7 +61,16 @@ const data = [
 
 const Favs: Page = () => {
   const router = useRouter();
+  const auth = useAuth();
 
+  useEffect(() => {
+    if (!auth.user && !auth.loading) {
+      auth.authModalRef.current?.open();
+      router.push('/');
+    }
+  }, [auth]);
+
+  if (!auth.user) return <></>;
   return (
     <>
       <ProfileNav />

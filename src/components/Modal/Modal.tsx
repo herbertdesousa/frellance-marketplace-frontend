@@ -15,14 +15,15 @@ export interface ModalRef {
   close(): void;
 }
 
-interface IProps {
+export interface ModalProps {
   className?: string;
   children?: React.ReactNode;
   title: string;
+  onClose?(): void;
 }
 
-const Modal: React.ForwardRefRenderFunction<ModalRef, IProps> = (
-  { className, children, title },
+const Modal: React.ForwardRefRenderFunction<ModalRef, ModalProps> = (
+  { className, children, title, onClose },
   ref,
 ) => {
   const [isOpened, setIsOpened] = useState(false);
@@ -51,8 +52,9 @@ const Modal: React.ForwardRefRenderFunction<ModalRef, IProps> = (
   }));
 
   const closeModal = useCallback(() => {
+    if (onClose) onClose();
     setIsOpened(false);
-  }, []);
+  }, [onClose]);
   const openModal = useCallback(() => {
     setIsVisible(true);
     setTimeout(() => setIsOpened(true), 100);

@@ -81,26 +81,12 @@ const Nav: Page<Props> = ({ children, variant = 'transparent', className }) => {
               `}
             onClick={() => router.push('/perfil/conta')}
           >
-            {auth.user.picture && (
-              <Image
-                src={auth.user.picture}
-                width={32}
-                height={32}
-                className="rounded-full"
-              />
-            )}
-            {!auth.user.picture && (
-              <div
-                className={`rounded-full p-1.5 ${
-                  variant === 'white' ? 'border border-gray2' : 'bg-gray3'
-                }`}
-              >
-                <MdPersonOutline
-                  size={20}
-                  className={variant === 'white' ? 'text-black' : 'text-white'}
-                />
-              </div>
-            )}
+            <Image
+              src={auth.user.picture || '/no-picture.svg'}
+              width={32}
+              height={32}
+              className="rounded-full"
+            />
 
             <p className="hidden md:block ml-3">
               olá,

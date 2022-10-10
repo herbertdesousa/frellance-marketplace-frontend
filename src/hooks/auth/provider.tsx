@@ -21,13 +21,9 @@ export const AuthProvider: Page = ({ children }) => {
   const auth = useCallback(async (token: string) => {
     setIsLoading(true);
 
-    const res = await api.post<User>(
-      '/users',
-      {},
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    );
+    (api.defaults.headers as any).authorization = `Bearer ${token}`;
+
+    const res = await api.post<User>('/users');
 
     setUser(res.data);
     setIsLoading(false);
@@ -46,6 +42,21 @@ export const AuthProvider: Page = ({ children }) => {
       });
   }, [hasLoadedInitialToken]);
 
+  useEffect(() => {
+    const interceptor = api.interceptors.response.use(
+      (response: any) => response,
+      (error: any) => {
+        console.log(error);
+        if (error?.code === 'auth/id-token-expired') {
+          setUser(undefined);
+        }
+        return Promise.reject(error);
+      },
+    );
+
+    return () => api.interceptors.response.eject(interceptor);
+  }, []);
+
   const signOut = useCallback(async () => {
     setIsLoading(true);
 
@@ -55,6 +66,15 @@ export const AuthProvider: Page = ({ children }) => {
     setIsLoading(false);
   }, []);
 
+  const refreshUser = useCallback(
+    async (updateFun: (old: User) => User) => {
+      if (!user) return;
+
+      setUser(updateFun(user));
+    },
+    [user],
+  );
+
   return (
     <AuthContext.Provider
       value={{
@@ -62,6 +82,7 @@ export const AuthProvider: Page = ({ children }) => {
         user,
         auth,
         signOut,
+        refreshUser,
         loading: { state: isLoading, set: setIsLoading },
       }}
     >

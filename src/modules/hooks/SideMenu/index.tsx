@@ -77,28 +77,43 @@ const SideMenuComponent: Page = () => {
         </div>
 
         <ul>
-          <SideMenuItem
-            onClick={() => {
-              router.push('/itens/vender');
-              currentSideMenuRef.current?.close();
-            }}
-            label="Anúncie itens"
-            isFirst
-          />
-          <SideMenuItem
-            onClick={() => {
-              router.push('/itens/conta');
-              currentSideMenuRef.current?.close();
-            }}
-            label="Ver Perfil"
-          />
-          <SideMenuItem
-            onClick={() => {
-              auth.signOut();
-              currentSideMenuRef.current?.close();
-            }}
-            label="Sair da Conta"
-          />
+          {auth.user && (
+            <>
+              <SideMenuItem
+                onClick={() => {
+                  router.push('/perfil/vender');
+                  currentSideMenuRef.current?.close();
+                }}
+                label="Anúncie itens"
+                isFirst
+              />
+              <SideMenuItem
+                onClick={() => {
+                  router.push('/perfil/conta');
+                  currentSideMenuRef.current?.close();
+                }}
+                label="Ver Perfil"
+              />
+              <SideMenuItem
+                onClick={() => {
+                  auth.signOut();
+                  currentSideMenuRef.current?.close();
+                }}
+                label="Sair da Conta"
+              />
+            </>
+          )}
+          {!auth.user && (
+            <>
+              <SideMenuItem
+                onClick={() => {
+                  auth.authModalRef.current?.open();
+                  currentSideMenuRef.current?.close();
+                }}
+                label="Entrar na sua Conta"
+              />
+            </>
+          )}
         </ul>
       </div>
     </SideMenu>

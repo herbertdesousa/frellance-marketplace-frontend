@@ -3,6 +3,7 @@ import { ModalRef } from '@/components/Modal';
 
 export interface User {
   uid: string;
+  email: string;
   name: string | null;
   picture: string | null;
   signInMethod: string;
@@ -20,6 +21,7 @@ export interface AuthContextData {
   authModalRef: RefObject<ModalRef>;
   auth: (token: string) => Promise<void>;
   signOut: () => Promise<void>;
+  refreshUser: (updateFun: (old: User) => User) => Promise<void>;
   loading: {
     state: boolean;
     set: Dispatch<SetStateAction<boolean>>;
