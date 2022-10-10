@@ -5,7 +5,7 @@ import { ListNav } from '@/modules/List';
 import { BreadCrumb, Footer } from '@/components';
 import { ListItem } from '@/modules/shared';
 
-import { capitalizeFirstLetter } from '@/utils';
+import { capitalizeFirstLetter } from '@/utils/transform';
 
 const data = [
   {

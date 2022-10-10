@@ -2,12 +2,13 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const app = initializeApp({
-  apiKey: 'AIzaSyCv8EAbkiszJH6DWl8g05c_rWnI8uPjKCw',
-  authDomain: 'test-auth-41451.firebaseapp.com',
-  projectId: 'test-auth-41451',
-  storageBucket: 'test-auth-41451.appspot.com',
-  messagingSenderId: '204571217114',
-  appId: '1:204571217114:web:0a91565d3a6dafae05e9e3',
+  apiKey: 'AIzaSyDuRNmus5-ubIs3IfQQV-t9ieAcyMDMu0E',
+  authDomain: 'frellance-marketplace.firebaseapp.com',
+  projectId: 'frellance-marketplace',
+  storageBucket: 'frellance-marketplace.appspot.com',
+  messagingSenderId: '220025258693',
+  appId: '1:220025258693:web:6f29c39ce5d1db23fb26ac',
+  measurementId: 'G-XHB68WMBCY',
 });
 
 const auth = getAuth(app);

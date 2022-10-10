@@ -1,5 +1,7 @@
 import { Page } from '@/types/Page';
 
+import { Formik } from 'formik';
+
 import { ProfileNav } from '@/modules/Profile';
 import { Button, Footer, TextField, Toggle } from '@/components';
 
@@ -15,96 +17,98 @@ const Account: Page = () => {
           Sobre Você
         </h1>
 
-        <ul className="md:max-w-sm">
-          <ProfileAccountItem
-            label="Seu Nome"
-            value="cleber da silva"
-            edit={{
-              buttonLabel: 'Editar',
-              editElement: ({ closeEdit }) => (
-                <div className="w-full">
-                  <TextField
-                    name="name"
-                    label="Seu Nome"
-                    placeholder="Digite seu Nome"
-                  />
-                  <div className="flex mt-2">
-                    <Button className="mr-2">Salvar</Button>
-                    <Button variant="outline" onClick={closeEdit}>
-                      Cancelar
-                    </Button>
+        <Formik initialValues={{ name: '' }} onSubmit={dt => console.log(dt)}>
+          <ul className="md:max-w-sm">
+            <ProfileAccountItem
+              label="Seu Nome"
+              value="cleber da silva"
+              edit={{
+                buttonLabel: 'Editar',
+                editElement: ({ closeEdit }) => (
+                  <div className="w-full">
+                    <TextField
+                      name="name"
+                      label="Seu Nome"
+                      placeholder="Digite seu Nome"
+                    />
+                    <div className="flex mt-2">
+                      <Button className="mr-2">Salvar</Button>
+                      <Button variant="outline" onClick={closeEdit}>
+                        Cancelar
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              ),
-            }}
-          />
+                ),
+              }}
+            />
 
-          <div className="w-full bg-gray1 my-4" style={{ height: 1 }} />
+            <div className="w-full bg-gray1 my-4" style={{ height: 1 }} />
 
-          <ProfileAccountItem label="Seu Email" value="cleber@gmail.com" />
+            <ProfileAccountItem label="Seu Email" value="cleber@gmail.com" />
 
-          <div className="w-full bg-gray1 my-4" style={{ height: 1 }} />
+            <div className="w-full bg-gray1 my-4" style={{ height: 1 }} />
 
-          <ProfileAccountItem
-            label="Seu Telefone"
-            value="(11) 40002-8922"
-            edit={{
-              buttonLabel: 'Editar',
-              editElement: ({ closeEdit }) => (
-                <div className="w-full">
-                  <TextField
-                    name="name"
-                    label="Seu Telefone"
-                    placeholder="Digite seu Telefone"
-                  />
-                  <div className="flex mt-2">
-                    <Button className="mr-2">Salvar</Button>
-                    <Button variant="outline" onClick={closeEdit}>
-                      Cancelar
-                    </Button>
+            <ProfileAccountItem
+              label="Seu Telefone"
+              value="(11) 40002-8922"
+              edit={{
+                buttonLabel: 'Editar',
+                editElement: ({ closeEdit }) => (
+                  <div className="w-full">
+                    <TextField
+                      name="name"
+                      label="Seu Telefone"
+                      placeholder="Digite seu Telefone"
+                    />
+                    <div className="flex mt-2">
+                      <Button className="mr-2">Salvar</Button>
+                      <Button variant="outline" onClick={closeEdit}>
+                        Cancelar
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              ),
-            }}
-          />
+                ),
+              }}
+            />
 
-          <div className="w-full bg-gray1 my-4" style={{ height: 1 }} />
+            <div className="w-full bg-gray1 my-4" style={{ height: 1 }} />
 
-          <ProfileAccountItem
-            label="Sua Senha"
-            value="***********"
-            edit={{
-              buttonLabel: 'Atualizar',
-              editElement: ({ closeEdit }) => (
-                <div className="w-full">
-                  <TextField
-                    name="name"
-                    label="Antiga Senha"
-                    placeholder="Digite a antiga senha"
-                  />
-                  <TextField
-                    name="name"
-                    label="Nova Senha"
-                    placeholder="Digite a nova senha"
-                    className="mt-2"
-                  />
-                  <TextField
-                    name="name"
-                    label="Confirme a Nova Senha"
-                    placeholder="Confirme a nova senha"
-                    className="mt-2"
-                  />
-                  <div className="flex mt-4">
-                    <Button className="mr-2">Salvar</Button>
-                    <Button variant="outline" onClick={closeEdit}>
-                      Cancelar
-                    </Button>
+            <ProfileAccountItem
+              label="Sua Senha"
+              value="***********"
+              edit={{
+                buttonLabel: 'Atualizar',
+                editElement: ({ closeEdit }) => (
+                  <div className="w-full">
+                    <TextField
+                      name="name"
+                      label="Antiga Senha"
+                      placeholder="Digite a antiga senha"
+                    />
+                    <TextField
+                      name="name"
+                      label="Nova Senha"
+                      placeholder="Digite a nova senha"
+                      className="mt-2"
+                    />
+                    <TextField
+                      name="name"
+                      label="Confirme a Nova Senha"
+                      placeholder="Confirme a nova senha"
+                      className="mt-2"
+                    />
+                    <div className="flex mt-4">
+                      <Button className="mr-2">Salvar</Button>
+                      <Button variant="outline" onClick={closeEdit}>
+                        Cancelar
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              ),
-            }}
-          />
-        </ul>
+                ),
+              }}
+            />
+          </ul>
+        </Formik>
       </div>
 
       <div className="max-width mt-10">

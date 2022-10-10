@@ -7,6 +7,7 @@ module.exports = {
       'primary': 'var(--primary)',
 
       'red': 'var(--red)',
+      'red-opaque': 'var(--red-opaque)',
 
       'white': 'var(--white)',
       'white-opaque': 'var(--white-opaque)',

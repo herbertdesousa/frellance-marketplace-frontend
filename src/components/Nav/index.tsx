@@ -3,8 +3,12 @@ import Link from 'next/link';
 
 import { MdMenu, MdPersonOutline } from 'react-icons/md';
 
+import { useAuth } from '@/hooks/auth';
 import { useSideMenu } from '@/hooks/sideMenu';
 import { useRouter } from 'next/router';
+import { getSalutation } from '@/utils/getSalutation';
+import { useMemo } from 'react';
+import Image from 'next/image';
 
 interface Props {
   variant?: 'white' | 'transparent';
@@ -13,7 +17,13 @@ interface Props {
 
 const Nav: Page<Props> = ({ children, variant = 'transparent', className }) => {
   const { sideMenuRef } = useSideMenu();
+  const auth = useAuth();
   const router = useRouter();
+
+  const userName = useMemo((): string => {
+    if (auth.user?.name) return auth.user.name.split(' ')[0];
+    return getSalutation();
+  }, [auth.user?.name]);
 
   return (
     <nav
@@ -44,34 +54,78 @@ const Nav: Page<Props> = ({ children, variant = 'transparent', className }) => {
           </Link>
         </div>
 
-        <button
-          type="button"
-          className={`
-              flex items-center text-left transition
+        {auth.loading.state && (
+          <span
+            className={`
+              ml-2
               ${
                 variant === 'white'
                   ? 'text-black'
                   : 'text-white hover:text-gray1'
               }
             `}
-          onClick={() => router.push('/perfil/conta')}
-        >
-          <div
-            className={`rounded-full p-1.5 ${
-              variant === 'white' ? 'border border-gray2' : 'bg-gray3'
-            }`}
           >
-            <MdPersonOutline
-              size={20}
-              className={variant === 'white' ? 'text-black' : 'text-white'}
-            />
-          </div>
-          <p className="hidden md:block ml-3">
-            olá,
-            <br />
-            <strong>Rodrigo</strong>
-          </p>
-        </button>
+            Carregando...
+          </span>
+        )}
+        {!auth.loading.state && auth.user && (
+          <button
+            type="button"
+            className={`
+                flex items-center text-left transition
+                ${
+                  variant === 'white'
+                    ? 'text-black'
+                    : 'text-white hover:text-gray1'
+                }
+              `}
+            onClick={() => router.push('/perfil/conta')}
+          >
+            {auth.user.picture && (
+              <Image
+                src={auth.user.picture}
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
+            )}
+            {!auth.user.picture && (
+              <div
+                className={`rounded-full p-1.5 ${
+                  variant === 'white' ? 'border border-gray2' : 'bg-gray3'
+                }`}
+              >
+                <MdPersonOutline
+                  size={20}
+                  className={variant === 'white' ? 'text-black' : 'text-white'}
+                />
+              </div>
+            )}
+
+            <p className="hidden md:block ml-3">
+              olá,
+              <br />
+              <strong>{userName}</strong>
+            </p>
+          </button>
+        )}
+        {!auth.loading.state && !auth.user && (
+          <button
+            type="button"
+            className={`
+                flex items-center text-left transition
+                ${
+                  variant === 'white'
+                    ? 'text-black'
+                    : 'text-white hover:text-gray1'
+                }
+              `}
+            onClick={() => auth.authModalRef.current?.open()}
+          >
+            <MdPersonOutline size={20} />
+            <span className="ml-2">Entrar</span>
+          </button>
+        )}
       </div>
 
       {children}

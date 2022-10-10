@@ -21,11 +21,11 @@
 .bg {
   @apply fixed top-0 w-screen h-screen bg-black-opaque z-40
 }
-.root-open {
+.bg-open {
   opacity: 1;
   transition: all 100ms linear;
 }
-.root-close {
+.bg-close {
   opacity: 0;
   transition: all 100ms linear;
 }

@@ -6,15 +6,15 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 const TodoList: Page<{ token: string }> = ({ token }) => {
-  useEffect(() => {
-    (async () => {
-      if (!token) return;
+  // useEffect(() => {
+  //   (async () => {
+  //     if (!token) return;
 
-      const res = await axios.get('http://localhost:3333/todos', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-    })();
-  }, [token]);
+  //     const res = await axios.get('http://localhost:3333/todos', {
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
+  //   })();
+  // }, [token]);
 
   return (
     <>
