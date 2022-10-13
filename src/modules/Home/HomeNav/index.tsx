@@ -25,10 +25,12 @@ const HomeNav: Page = () => {
   return (
     <>
       <Nav variant="transparent">
-        <div className="w-full border-t border-b border-gray3">
+        <div className="w-full border-t border-b border-gray3 whitespace-nowrap">
           <ul className="flex items-center text-xs text-white py-2 md:text-sm max-width">
             <li className="mr-3 hover:text-gray1 transition">
-              <button type="button">para você</button>
+              <button type="button" onClick={() => router.push('/itens')}>
+                buscar itens
+              </button>
             </li>
             <li className="hover:text-gray1 transition">
               <button type="button">comece a vender</button>
@@ -59,10 +61,10 @@ const HomeNav: Page = () => {
                             flex items-center py-2 px-4 bg-white hover:bg-gray0.5 w-full transition
                             ${index === 0 ? '' : 'mt-2'}
                           `}
-                          onClick={() => router.push(item.link)}
+                          onClick={() => router.push(`itens/${item.slug}`)}
                         >
-                          <item.icon size={16} className="mr-4" />
-                          {item.label}
+                          <item.Icon size={16} className="mr-4" />
+                          {item.name}
                         </button>
                       </li>
                     ))}
@@ -78,8 +80,11 @@ const HomeNav: Page = () => {
                     index === 0 ? '' : 'ml-3'
                   }`}
                 >
-                  <button type="button" onClick={() => router.push(item.link)}>
-                    {item.label.toLocaleLowerCase()}
+                  <button
+                    type="button"
+                    // onClick={() => router.push(item.link)}
+                  >
+                    {item.name.toLocaleLowerCase()}
                   </button>
                 </li>
               ))}

@@ -62,11 +62,11 @@ const SideMenuComponent: Page = () => {
             <SideMenuItem
               key={item.id}
               onClick={() => {
-                router.push(`/itens/${item.label}`);
+                router.push(`/itens/${item.slug}`);
                 currentSideMenuRef.current?.close();
               }}
-              Icon={item.icon}
-              label={item.label}
+              Icon={item.Icon}
+              label={item.name}
               isFirst={index === 0}
             />
           ))}

@@ -26,7 +26,7 @@ const CategoriesCarrousel: Page<{ className?: string }> = ({ className }) => {
           <li key={item.id}>
             <button
               type="button"
-              onClick={() => router.push(item.link)}
+              onClick={() => router.push(`itens/${item.slug}`)}
               className={`
               relative ${style['item-measures']}
               ${index !== 0 ? 'ml-4' : ''}
@@ -36,7 +36,7 @@ const CategoriesCarrousel: Page<{ className?: string }> = ({ className }) => {
                 className={`relative ${style['item-measures']} overflow-hidden`}
               >
                 <Image
-                  src={item.img}
+                  src={item.img_url}
                   layout="fill"
                   objectFit="cover"
                   className="brightness-50 hover:scale-110 transition duration-500"
@@ -44,7 +44,7 @@ const CategoriesCarrousel: Page<{ className?: string }> = ({ className }) => {
               </div>
 
               <div className="absolute flex justify-between items-center w-full bottom-0 px-3 pb-4 text-white">
-                <span className="font-merriweather text-lg">{item.label}</span>
+                <span className="font-merriweather text-lg">{item.name}</span>
                 <MdArrowForward size={18} />
               </div>
             </button>

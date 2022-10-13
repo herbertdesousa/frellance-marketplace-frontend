@@ -18,10 +18,10 @@ const HomeFooter: Page = () => {
               <button
                 type="button"
                 className="flex items-center text-gray2 hover:text-white transition"
-                onClick={() => router.push(item.link)}
+                onClick={() => router.push(`itens/${item.slug}`)}
               >
-                <item.icon size={16} className="mr-2" />
-                {item.label}
+                <item.Icon size={16} className="mr-2" />
+                {item.name}
               </button>
             </li>
           ))}
