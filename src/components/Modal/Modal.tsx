@@ -20,10 +20,11 @@ export interface ModalProps {
   children?: React.ReactNode;
   title: string;
   onClose?(): void;
+  onClickClose?(): void;
 }
 
 const Modal: React.ForwardRefRenderFunction<ModalRef, ModalProps> = (
-  { className, children, title, onClose },
+  { className, children, title, onClose, onClickClose },
   ref,
 ) => {
   const [isOpened, setIsOpened] = useState(false);
@@ -60,6 +61,11 @@ const Modal: React.ForwardRefRenderFunction<ModalRef, ModalProps> = (
     setTimeout(() => setIsOpened(true), 100);
   }, []);
 
+  const handleOnClickClose = useCallback(() => {
+    if (onClickClose) onClickClose();
+    closeModal();
+  }, [closeModal, onClickClose]);
+
   if (!isVisible) return <></>;
   return (
     <div className="flex items-center justify-center ">
@@ -68,8 +74,8 @@ const Modal: React.ForwardRefRenderFunction<ModalRef, ModalProps> = (
         role="button"
         tabIndex={0}
         className={bgClassName}
-        onClick={() => closeModal()}
-        onKeyDown={() => closeModal()}
+        onClick={handleOnClickClose}
+        onKeyDown={handleOnClickClose}
       />
       <div
         className={rootClassName}
@@ -77,7 +83,7 @@ const Modal: React.ForwardRefRenderFunction<ModalRef, ModalProps> = (
       >
         <div className="flex justify-between items-center mb-8">
           <h1 className="font-merriweather text-2xl font-semibold">{title}</h1>
-          <button type="button" className="" onClick={() => closeModal()}>
+          <button type="button" className="" onClick={handleOnClickClose}>
             <MdClose size={24} />
           </button>
         </div>

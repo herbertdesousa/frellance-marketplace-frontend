@@ -5,18 +5,16 @@ import Image from 'next/image';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { MdAdd, MdMail, MdPersonOutline, MdPhone } from 'react-icons/md';
-
 import { useAuth } from '@/hooks/auth';
 import { useRouter } from 'next/router';
 
-import { ProfileNav } from '@/modules/Profile';
+import { ProfileNav } from '@/modules/pages/Profile';
 import { Button, Footer, TextField, Toggle } from '@/components';
 
 import {
   ProfileAccountContacts,
   ProfileAccountItem,
-} from '@/modules/Profile/ProfileAccount';
+} from '@/modules/pages/Profile/ProfileAccount';
 import { api } from '@/services/api';
 
 const validationSchemaNameForm = Yup.object().shape({
@@ -28,7 +26,7 @@ const Account: Page = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!auth.user && !auth.loading) {
+    if (!auth.user && !auth.loading.state) {
       auth.authModalRef.current?.open();
       router.push('/');
     }
@@ -100,6 +98,7 @@ const Account: Page = () => {
                           return text.replace(/[^A-z] /g, '');
                         }}
                         placeholder="Digite seu Nome"
+                        isRequired
                       />
                       <div className="flex mt-2">
                         <Button

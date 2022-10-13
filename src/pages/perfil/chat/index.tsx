@@ -1,7 +1,7 @@
 import { Page } from '@/types/Page';
 
 import { useEffect, useState } from 'react';
-import { ProfileNav } from '@/modules/Profile';
+import { ProfileNav } from '@/modules/pages/Profile';
 
 import { useAuth } from '@/hooks/auth';
 import { useRouter } from 'next/router';
@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import {
   ProfileChatContacts,
   ProfileChatMessages,
-} from '@/modules/Profile/ProfileChat';
+} from '@/modules/pages/Profile/ProfileChat';
 
 const Chat: Page = () => {
   const [navHeight, setNavHeight] = useState(0);
@@ -18,7 +18,7 @@ const Chat: Page = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!auth.user && !auth.loading) {
+    if (!auth.user && !auth.loading.state) {
       auth.authModalRef.current?.open();
       router.push('/');
     }

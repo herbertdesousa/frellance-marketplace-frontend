@@ -31,6 +31,7 @@
   "rules": {
     "prettier/prettier": "error",
     "no-use-before-define": "off",
+    "no-return-await": "off",
     "camelcase": "off",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",

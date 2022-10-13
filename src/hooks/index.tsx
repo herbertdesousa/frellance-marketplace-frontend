@@ -1,15 +1,18 @@
 import { Page } from '@/types/Page';
 import { AuthProvider } from './auth/provider';
 import { CategoriesProvider } from './categories';
+import { ModalProvider } from './modal';
 import { SideMenuProvider } from './sideMenu';
 
 const Hooks: Page = ({ children }) => {
   return (
-    <CategoriesProvider data={[]}>
-      <AuthProvider>
-        <SideMenuProvider>{children}</SideMenuProvider>
-      </AuthProvider>
-    </CategoriesProvider>
+    <ModalProvider>
+      <CategoriesProvider>
+        <AuthProvider>
+          <SideMenuProvider>{children}</SideMenuProvider>
+        </AuthProvider>
+      </CategoriesProvider>
+    </ModalProvider>
   );
 };
 

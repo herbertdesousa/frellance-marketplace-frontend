@@ -8,7 +8,7 @@ import {
   ListDetailsImage,
   ListDetailsNav,
   ListDetailsRelated,
-} from '@/modules/List/ListDetails';
+} from '@/modules/pages/List/ListDetails';
 import { Footer } from '@/components';
 
 const Details: Page = () => {

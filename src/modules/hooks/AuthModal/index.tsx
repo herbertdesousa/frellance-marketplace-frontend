@@ -1,6 +1,6 @@
 import { Page } from '@/types/Page';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useImperativeHandle, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import {
@@ -18,6 +18,8 @@ import { useAuth } from '@/hooks/auth';
 
 import { Button, FormWarning, Modal, TextField } from '@/components';
 import { firebaseAuthErrors } from '@/utils/firebaseAuthErrors';
+import { ModalRef } from '@/components/Modal';
+import { AuthModalRefOpenPayload } from '@/hooks/auth/types';
 
 interface AuthFormData {
   email: string;
@@ -33,6 +35,19 @@ type FormType = 'sign-in' | 'sign-up';
 
 const AuthModal: Page = () => {
   const { authModalRef, auth, loading } = useAuth();
+
+  const modalRef = useRef<ModalRef>(null);
+  const [modalProps, setModalProps] = useState<AuthModalRefOpenPayload>({});
+
+  useImperativeHandle(authModalRef, () => ({
+    open(payload: AuthModalRefOpenPayload) {
+      setModalProps(payload);
+      modalRef.current?.open();
+    },
+    close() {
+      modalRef.current?.close();
+    },
+  }));
 
   const [formType, setFormType] = useState<FormType>('sign-in');
   const changeFormType = (_formType: FormType) => {
@@ -66,14 +81,14 @@ const AuthModal: Page = () => {
           result.user.getIdToken().then(token => auth(token));
         }
 
-        authModalRef.current?.close();
+        modalRef.current?.close();
       } catch (err: any) {
         setErrorMessage(firebaseAuthErrors[err.code as 'auth/app-deleted']);
       } finally {
         loading.set(false);
       }
     },
-    [auth, authModalRef, formType, loading],
+    [auth, modalRef, formType, loading],
   );
 
   const signInWithGoogle = useCallback(async () => {
@@ -88,18 +103,19 @@ const AuthModal: Page = () => {
 
       result.user.getIdToken().then(token => auth(token));
 
-      authModalRef.current?.close();
+      modalRef.current?.close();
     } catch (err: any) {
       setErrorMessage(firebaseAuthErrors[err.code as 'auth/app-deleted']);
     } finally {
       loading.set(false);
     }
-  }, [auth, authModalRef, loading]);
+  }, [auth, modalRef, loading]);
 
   return (
     <Modal
-      ref={authModalRef}
+      ref={modalRef}
       title={formType === 'sign-in' ? 'Entrar' : 'Criar Conta'}
+      {...modalProps}
     >
       <button
         type="button"
@@ -135,6 +151,7 @@ const AuthModal: Page = () => {
               type="email"
               label="Seu Email"
               placeholder="Digite seu Email..."
+              isRequired
             />
             <TextField
               name="password"
@@ -150,6 +167,7 @@ const AuthModal: Page = () => {
                 onClick: () => setIsPasswordVisible(st => !st),
               }}
               className="mt-4"
+              isRequired
             />
 
             <Button

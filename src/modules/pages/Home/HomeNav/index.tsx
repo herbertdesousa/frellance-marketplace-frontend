@@ -33,7 +33,9 @@ const HomeNav: Page = () => {
               </button>
             </li>
             <li className="hover:text-gray1 transition">
-              <button type="button">comece a vender</button>
+              <button type="button" onClick={() => router.push('/vender')}>
+                comece a vender
+              </button>
             </li>
             <div className="w-0.5 h-2.5 bg-gray2 mx-3" />
 

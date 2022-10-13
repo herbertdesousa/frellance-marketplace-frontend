@@ -58,6 +58,56 @@ const SideMenuComponent: Page = () => {
         </div>
 
         <ul>
+          <SideMenuItem
+            onClick={() => {
+              router.push('/');
+              currentSideMenuRef.current?.close();
+            }}
+            label="Início"
+            isFirst
+          />
+          <SideMenuItem
+            onClick={() => {
+              router.push('/itens');
+              currentSideMenuRef.current?.close();
+            }}
+            label="Ver Itens"
+          />
+
+          {auth.user && (
+            <>
+              <SideMenuItem
+                onClick={() => {
+                  router.push('/vender');
+                  currentSideMenuRef.current?.close();
+                }}
+                label="Anúncie itens"
+              />
+              <SideMenuItem
+                onClick={() => {
+                  router.push('/perfil/conta');
+                  currentSideMenuRef.current?.close();
+                }}
+                label="Ver Perfil"
+              />
+            </>
+          )}
+          {!auth.user && (
+            <>
+              <SideMenuItem
+                onClick={() => {
+                  auth.authModalRef.current?.open();
+                  currentSideMenuRef.current?.close();
+                }}
+                label="Entrar na sua Conta"
+              />
+            </>
+          )}
+
+          <div className="p-4">
+            <div className="w-full bg-gray1" style={{ height: 1 }} />
+          </div>
+
           {categories.data.map((item, index) => (
             <SideMenuItem
               key={item.id}
@@ -70,47 +120,19 @@ const SideMenuComponent: Page = () => {
               isFirst={index === 0}
             />
           ))}
-        </ul>
 
-        <div className="p-4">
-          <div className="w-full bg-gray1" style={{ height: 1 }} />
-        </div>
-
-        <ul>
           {auth.user && (
             <>
-              <SideMenuItem
-                onClick={() => {
-                  router.push('/perfil/vender');
-                  currentSideMenuRef.current?.close();
-                }}
-                label="Anúncie itens"
-                isFirst
-              />
-              <SideMenuItem
-                onClick={() => {
-                  router.push('/perfil/conta');
-                  currentSideMenuRef.current?.close();
-                }}
-                label="Ver Perfil"
-              />
+              <div className="p-4">
+                <div className="w-full bg-gray1" style={{ height: 1 }} />
+              </div>
+
               <SideMenuItem
                 onClick={() => {
                   auth.signOut();
                   currentSideMenuRef.current?.close();
                 }}
                 label="Sair da Conta"
-              />
-            </>
-          )}
-          {!auth.user && (
-            <>
-              <SideMenuItem
-                onClick={() => {
-                  auth.authModalRef.current?.open();
-                  currentSideMenuRef.current?.close();
-                }}
-                label="Entrar na sua Conta"
               />
             </>
           )}

@@ -1,11 +1,19 @@
 import { Page } from '@/types/Page';
 
+import { Slot } from '@radix-ui/react-slot';
+
 import { useField } from 'formik';
-import { ChangeEvent, useCallback, useMemo, useState } from 'react';
+import {
+  ChangeEvent,
+  createElement,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 import { MdError } from 'react-icons/md';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label: React.ReactNode;
   name: string;
   placeholder: string;
   className?: string;
@@ -14,6 +22,9 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
     element: React.ReactNode;
     onClick?(): void;
   };
+  isTextarea?: boolean;
+  isRequired?: boolean;
+  helperText?: string;
 }
 
 const TextField: Page<Props> = ({
@@ -23,8 +34,13 @@ const TextField: Page<Props> = ({
   className,
   formatOnChangeText,
   right,
+  isTextarea,
+  helperText,
+  isRequired,
   ...props
 }) => {
+  const InputComponent: any = isTextarea ? 'textarea' : 'input';
+
   const [fieldProps, meta, helpers] = useField(name);
 
   const [isFocused, setIsFocused] = useState(false);
@@ -49,8 +65,8 @@ const TextField: Page<Props> = ({
     [props?.onBlur],
   );
   const onChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const evt: React.ChangeEvent<HTMLInputElement> = {
+    (e: ChangeEvent<any>) => {
+      const evt: React.ChangeEvent<any> = {
         ...e,
         target: {
           ...e.target,
@@ -68,31 +84,27 @@ const TextField: Page<Props> = ({
 
   return (
     <div className={className}>
-      <div className="flex justify-between">
-        <label htmlFor={name} className="font-medium">
-          {label}
-        </label>
-        {isErrored && (
-          <div className="flex items-center text-red">
-            <MdError size={16} className="mr-1" />
-            {meta.error}
-          </div>
-        )}
-      </div>
+      <label htmlFor={name} className="flex font-medium">
+        {label}
+        {isRequired && <span className="text-red ml-1">*</span>}
+      </label>
       <div
         className={`
-          h-12 p-4 flex items-center w-full mt-1 transition
+          px-4 py-2 flex items-center w-full mt-1 transition
           ${isFocused ? 'bg-gray1' : 'bg-gray0.5'}
         `}
+        style={{ minHeight: 48 }}
       >
-        <input
+        <InputComponent
           id={name}
           type="text"
-          className="flex flex-1 bg-transparent w-full"
+          className="flex flex-1 bg-transparent w-full resize-none"
           placeholder={placeholder}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onChange={onChange}
+          cols={30}
+          rows={4}
+          onFocus={onFocus as any}
+          onBlur={onBlur as any}
+          onChange={onChange as any}
           value={meta.value}
           {...props}
         />
@@ -102,6 +114,13 @@ const TextField: Page<Props> = ({
           </button>
         )}
       </div>
+      {helperText && <p className="text-xs mt-1">{`* ${helperText}`}</p>}
+      {isErrored && (
+        <div className="flex items-center text-red mt-1">
+          <MdError size={16} className="mr-1" />
+          {meta.error}
+        </div>
+      )}
     </div>
   );
 };

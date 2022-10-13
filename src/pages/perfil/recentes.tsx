@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/hooks/auth';
 
-import { ProfileNav } from '@/modules/Profile';
+import { ProfileNav } from '@/modules/pages/Profile';
 import { ListItem } from '@/modules/shared';
 import { MdArrowForward, MdAccessTime } from 'react-icons/md';
 import { Button } from '@/components';
@@ -65,7 +65,7 @@ const Recents: Page = () => {
   const auth = useAuth();
 
   useEffect(() => {
-    if (!auth.user && !auth.loading) {
+    if (!auth.user && !auth.loading.state) {
       auth.authModalRef.current?.open();
       router.push('/');
     }

@@ -1,7 +1,7 @@
 import { Page } from '@/types/Page';
 import { useRouter } from 'next/router';
 
-import { ListNav } from '@/modules/List';
+import { ListNav } from '@/modules/pages/List';
 import { BreadCrumb, Footer } from '@/components';
 import { ListItem } from '@/modules/shared';
 

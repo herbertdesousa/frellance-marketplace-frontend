@@ -5,7 +5,7 @@ import {
   HomeHero,
   HomeNav,
   HomeSellWithUs,
-} from '@/modules/Home';
+} from '@/modules/pages/Home';
 import { CategoriesCarrousel } from '@/modules/shared';
 import { Footer } from '@/components';
 

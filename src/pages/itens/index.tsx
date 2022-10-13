@@ -1,6 +1,6 @@
 import { Page } from '@/types/Page';
 
-import ListNav from '@/modules/List/ListNav';
+import ListNav from '@/modules/pages/List/ListNav';
 import { CategoriesCarrousel, ListItem } from '@/modules/shared';
 import { Footer } from '@/components';
 

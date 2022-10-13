@@ -3,9 +3,9 @@ import { Page } from '@/types/Page';
 import { useRouter } from 'next/router';
 import { isMobile } from 'react-device-detect';
 
-import { ProfileNav } from '@/modules/Profile';
+import { ProfileNav } from '@/modules/pages/Profile';
 
-import { ProfileChatContacts } from '@/modules/Profile/ProfileChat';
+import { ProfileChatContacts } from '@/modules/pages/Profile/ProfileChat';
 import { useEffect } from 'react';
 import { useAuth } from '@/hooks/auth';
 
@@ -14,7 +14,7 @@ const Chat: Page = () => {
   const auth = useAuth();
 
   useEffect(() => {
-    if (!auth.user && !auth.loading) {
+    if (!auth.user && !auth.loading.state) {
       auth.authModalRef.current?.open();
       router.push('/');
     }

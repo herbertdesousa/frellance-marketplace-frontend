@@ -1,5 +1,5 @@
 import { Dispatch, RefObject, SetStateAction } from 'react';
-import { ModalRef } from '@/components/Modal';
+import { ModalProps, ModalRef } from '@/components/Modal';
 
 export interface User {
   uid: string;
@@ -16,9 +16,17 @@ export interface UserContact {
   contact: string;
 }
 
+export interface AuthModalRefOpenPayload {
+  onClickClose?(): void;
+}
+
+export type AuthModalRef = Omit<ModalRef, 'open'> & {
+  open(payload?: AuthModalRefOpenPayload): void;
+};
+
 export interface AuthContextData {
   user: User | undefined;
-  authModalRef: RefObject<ModalRef>;
+  authModalRef: RefObject<AuthModalRef>;
   auth: (token: string) => Promise<void>;
   signOut: () => Promise<void>;
   refreshUser: (updateFun: (old: User) => User) => Promise<void>;
