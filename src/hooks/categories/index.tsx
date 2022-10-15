@@ -38,7 +38,9 @@ interface CategoriesType {
 }
 
 const CategoriesProvider: Page = ({ children }) => {
-  const { data } = useSWR<ResponseCategory[]>('/categories');
+  const { data } = useSWR<ResponseCategory[]>('/categories', {
+    revalidateOnFocus: false,
+  });
 
   const formattedData = useMemo((): Category[] => {
     if (!data) return [];
@@ -50,7 +52,11 @@ const CategoriesProvider: Page = ({ children }) => {
   }, [data]);
 
   return (
-    <CategoriesContext.Provider value={{ data: formattedData }}>
+    <CategoriesContext.Provider
+      value={{
+        data: formattedData,
+      }}
+    >
       {children}
     </CategoriesContext.Provider>
   );

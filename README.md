@@ -11,10 +11,10 @@ perfil/anuncios *criar
   [x] botão para ir criar anuncio
 
 perfil/favoritos
-  [] fetch
+  [x] fetch
 
 perfil/ultimos-vistos
-  [] fetch
+  [x] fetch
 
 ---
 itens
@@ -26,7 +26,7 @@ itens/[categories]
 
 itens/detalhes
   [x] fetch
-  [] mark as view
+  [x] mark as view
   é meu item?
     true:
       [] deletar anuncio

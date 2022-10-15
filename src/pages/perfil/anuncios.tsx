@@ -34,6 +34,7 @@ const Adversites: Page = () => {
 
   const { data, error } = useSWR<Adversite[]>(
     auth.user && !auth.loading.state && 'categories/items',
+    { revalidateOnFocus: false },
   );
 
   useEffect(() => {

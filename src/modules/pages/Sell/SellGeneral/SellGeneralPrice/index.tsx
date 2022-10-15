@@ -21,7 +21,7 @@ const SellGeneralPrice: Page = () => {
 
       <div className="mt-2">
         <strong className="font-medium">Valor</strong>
-        <Radio name="price.value" label="A Combinar" value="a combinar" />
+        <Radio name="price.value" label="A Combinar" value="A Combinar" />
         <Radio
           name="price.value"
           label="Fixo"

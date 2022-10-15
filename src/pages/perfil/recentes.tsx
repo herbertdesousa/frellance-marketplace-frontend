@@ -1,6 +1,7 @@
 import { Page } from '@/types/Page';
 import { useEffect } from 'react';
 
+import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { useAuth } from '@/hooks/auth';
 
@@ -8,61 +9,24 @@ import { ProfileNav } from '@/modules/pages/Profile';
 
 import { MdArrowForward, MdAccessTime } from 'react-icons/md';
 import { EmptyState } from '@/components';
+import { ListItem } from '@/modules/shared';
 
-const data = [
-  {
-    id: 'id-123',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-456',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-789',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-753',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-159',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-156',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-354',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-756',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-];
+interface Recents {
+  id: string;
+  img: string;
+  price: string;
+  description: string;
+  favorited: boolean;
+}
 
 const Recents: Page = () => {
   const router = useRouter();
   const auth = useAuth();
+
+  const { data, error } = useSWR<Recents[]>(
+    auth.user && !auth.loading.state && 'users/preferences?type=recent-view',
+    { revalidateOnFocus: false },
+  );
 
   useEffect(() => {
     if (!auth.user && !auth.loading.state) {
@@ -77,32 +41,40 @@ const Recents: Page = () => {
       <ProfileNav />
 
       <div className="mt-10 max-width">
-        {/* <div>
+        <div>
           <h1 className="text-2xl font-merriweather font-bold mb-6">
-            Anúncios Favoritados
+            Vistos Recentemente
           </h1>
 
           <ul className="grid gap-x-4 md:grid-cols-2 lg:grid-cols-4">
-            {data.map(item => (
-              <ListItem key={item.id} item={item} />
-            ))}
+            {!!data &&
+              data.length > 0 &&
+              data.map(item => (
+                <ListItem
+                  key={item.id}
+                  item={item}
+                  isFavorited={item.favorited}
+                />
+              ))}
           </ul>
-        </div> */}
+        </div>
 
-        <EmptyState
-          icon={MdAccessTime}
-          title="Nada Visto Recentemente"
-          description="Busque por produtos e os últimos visualizados aparecerão aqui."
-          button={{
-            title: (
-              <>
-                buscar itens
-                <MdArrowForward className="ml-4" />
-              </>
-            ),
-            onClick: () => router.push('/itens'),
-          }}
-        />
+        {!!data && data.length === 0 && (
+          <EmptyState
+            icon={MdAccessTime}
+            title="Nada Visto Recentemente"
+            description="Busque por produtos e os últimos visualizados aparecerão aqui."
+            button={{
+              title: (
+                <>
+                  buscar itens
+                  <MdArrowForward className="ml-4" />
+                </>
+              ),
+              onClick: () => router.push('/itens'),
+            }}
+          />
+        )}
       </div>
     </>
   );

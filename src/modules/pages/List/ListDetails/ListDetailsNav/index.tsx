@@ -32,7 +32,7 @@ const ListDetailsNav: Page<{ id: string }> = ({ id }) => {
           <MdShare size={24} />
         </button>
         <FavButton
-          id={id}
+          itemId={id}
           className="top-0"
           containerClassName="md:border border-gray1"
           iconSize={24}

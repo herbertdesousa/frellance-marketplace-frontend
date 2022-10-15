@@ -14,12 +14,14 @@ interface Props {
     price: string;
     description: string;
   };
+  isFavorited?: boolean;
   imgMeasureType?: 'square' | 'fill';
 }
 
 const ListItem: Page<Props> = ({
   className,
   item,
+  isFavorited = false,
   imgMeasureType = 'fill',
 }) => {
   const router = useRouter();
@@ -46,11 +48,13 @@ const ListItem: Page<Props> = ({
 
         <div className="mt-3">
           <strong>{item.price}</strong>
-          <p className="text-gray3">{item.description}</p>
+          <p className="text-gray3 whitespace-nowrap overflow-hidden truncate">
+            {item.description}
+          </p>
         </div>
       </button>
 
-      <FavButton id={item.id} />
+      <FavButton defaultValue={isFavorited} itemId={item.id} />
     </li>
   );
 };

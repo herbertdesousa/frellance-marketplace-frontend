@@ -17,6 +17,7 @@ import { MdArrowForward } from 'react-icons/md';
 
 import { Category } from '@/hooks/categories';
 import { api } from '@/services/api';
+import { useEffect } from 'react';
 
 export interface ItemDetailsAttribute {
   id: string;
@@ -39,6 +40,16 @@ export interface ItemDetails {
 
 const Details: Page<{ item?: ItemDetails }> = ({ item }) => {
   const router = useRouter();
+
+  useEffect(() => {
+    if (!router.isFallback && item) {
+      api.post(
+        '/users/preferences',
+        {},
+        { params: { type: 'recent-view', itemId: item.id } },
+      );
+    }
+  }, [item, router.isFallback]);
 
   if (router.isFallback)
     return (

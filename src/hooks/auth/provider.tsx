@@ -17,7 +17,8 @@ export const AuthProvider: Page = ({ children }) => {
 
   const [user, setUser] = useState<User | undefined>();
   const [isLoading, setIsLoading] = useState(true);
-  const [hasLoadedInitialToken, setHasLoadedInitialToken] = useState(false);
+  // const [hasLoadedInitialToken, setHasLoadedInitialToken] = useState(false);
+  const hasLoadedInitialToken = useRef(false);
 
   const auth = useCallback(async (token: string) => {
     setIsLoading(true);
@@ -31,17 +32,15 @@ export const AuthProvider: Page = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (!hasLoadedInitialToken)
-      firebaseConfig.auth.onAuthStateChanged(credential => {
-        setHasLoadedInitialToken(true);
-        setIsLoading(true);
+    if (!hasLoadedInitialToken.current)
+      firebaseConfig.auth.onAuthStateChanged(async credential => {
+        hasLoadedInitialToken.current = true;
 
         if (credential) {
-          credential.getIdToken().then(token => auth(token));
+          await credential.getIdToken().then(token => auth(token));
         }
-        setIsLoading(false);
       });
-  }, [hasLoadedInitialToken]);
+  }, []);
 
   useEffect(() => {
     const interceptor = api.interceptors.response.use(

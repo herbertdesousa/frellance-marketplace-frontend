@@ -1,22 +1,25 @@
+import { api } from '@/services/api';
 import { Page } from '@/types/Page';
 import { useCallback, useEffect, useState } from 'react';
 
 import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
 
 interface Props {
-  id: string;
+  itemId: string;
   iconSize?: 16 | 24;
   className?: string;
   containerClassName?: string;
+  defaultValue?: boolean;
 }
 
 const FavButton: Page<Props> = ({
-  id,
+  itemId,
   iconSize = 16,
   className,
   containerClassName,
+  defaultValue = false,
 }) => {
-  const [isFavorited, setIsFavorited] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(defaultValue);
 
   const [seconds, setSeconds] = useState(0);
   useEffect(() => {
@@ -32,17 +35,35 @@ const FavButton: Page<Props> = ({
     };
   });
 
-  const onClick = useCallback(() => {
-    setIsFavorited(st => {
-      if (st) return false;
+  const onFavorited = useCallback(async () => {
+    await api.post(
+      '/users/preferences',
+      {},
+      {
+        params: { type: 'favorites', itemId },
+      },
+    );
+    setIsFavorited(true);
+  }, [itemId]);
 
-      setSeconds(2);
-      return true;
+  const onUnfavorited = useCallback(async () => {
+    await api.delete('/users/preferences', {
+      params: { type: 'favorites', itemId },
     });
-  }, []);
+    setIsFavorited(false);
+  }, [itemId]);
+
+  const handleOnClick = useCallback(() => {
+    const newFavorited = !isFavorited;
+    if (!newFavorited) {
+      onUnfavorited();
+    } else {
+      onFavorited();
+      setSeconds(2);
+    }
+  }, [isFavorited]);
 
   const isAddAnimationRunning = isFavorited && seconds !== 0;
-
   return (
     <button
       type="button"
@@ -51,7 +72,7 @@ const FavButton: Page<Props> = ({
         transform: `translate(${isAddAnimationRunning ? '-70px' : '0px'}, 0)`,
         right: 28 + 8,
       }}
-      onClick={onClick}
+      onClick={handleOnClick}
     >
       <div
         className={`absolute bg-white transition ${containerClassName}  ${
