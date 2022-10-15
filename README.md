@@ -1,74 +1,62 @@
-inspirações
-- mercado livre: marketplace e funcionamento
-- webmotors: marketplace e funcionamento
-- quinto andar: design e ideas
-- james edition: design e ideas/marketplace e funcionamento
+# TIMELINE
+home
+  hero
+    [] itens em alta *1
+  em alta
+    [] itens em alta *1
 
+---
+perfil/anuncios *criar
+  [x] listar anuncios
+  [x] botão para ir criar anuncio
 
-general
- name
- photos
- price (on request, fixed)
- location and address
- description
+perfil/favoritos
+  [] fetch
 
-car
- year
- mileage
- condition (new, used)
- engine (16 cylinder)
- gearbox (stick shift, automatic, ...)
- drive (lhd)
- fuel type (petrol)
+perfil/ultimos-vistos
+  [] fetch
 
-real estates
- beds
- baths
- sqm
- features (garden, pool, terrace, ...)
- year built
- property type (villa)
+---
+itens
+  [] itens em alta *1
 
-watches
- year
- gender
- case material
- dial color
- dial shape
- strap color
- strap material
- movement
- water resistance
- crystal
- case diameter(mm)
- thickness(mm)
- authenticity
- features
- functions
+itens/[categories]
+  [] filtros
+  [] buscador
 
-yatchts
- year
- length(m/ft)
- beam(m/ft)
- draft(m/ft)
- berths
- engines
-  quantity
-  hp
-  hours
-  brand
- speeds
-  cruise
-  max
- fuel tankage
- hull material
- boal type (motor)
+itens/detalhes
+  [x] fetch
+  [] mark as view
+  é meu item?
+    true:
+      [] deletar anuncio
+      ...outras features
+    false:
+      [] contact
 
-helicopters
- year
- condition (new, used)
- helicopter type
- crew
- ttaf
- max take off weight(kg, lbs)
- capacity
+# CHORES
+home
+  vender
+  [] botão link
+  [] categorias carrousel
+
+# FIXES
+attributes
+  real-estates
+    - km2 -> m2
+
+excessive fetching categories and items
+
+# FEATURES
+vender
+- formatar attributos
+- format, ex: 8 Cilindros, 16 km => Cilindros, km
+
+attributes
+  car
+  - (ADD) fuel type (flex, hibrido)
+  - car type (sedan, suv)
+  - color
+  - interior color
+
+optimize firebase storage

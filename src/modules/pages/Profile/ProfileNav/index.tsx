@@ -3,14 +3,13 @@ import { Page } from '@/types/Page';
 import { Nav } from '@/components';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
-import { MdOpenInNew } from 'react-icons/md';
 
 const data = [
   { label: 'Conta', link: '/perfil/conta' },
   { label: 'Chat', link: '/perfil/chat' },
   { label: 'Favoritos', link: '/perfil/favoritos' },
   { label: 'Últimos Vistos', link: '/perfil/recentes' },
-  { label: 'Vender', link: '/vender', icon: () => <MdOpenInNew size={16} /> },
+  { label: 'Anúncios', link: '/perfil/anuncios' },
 ];
 
 const ProfileNav: Page = () => {
@@ -62,11 +61,6 @@ const ProfileNav: Page = () => {
                 onClick={() => router.push(item.link)}
               >
                 {item.label}
-                {item.icon && (
-                  <div className="ml-1.5">
-                    <item.icon />
-                  </div>
-                )}
               </button>
             </li>
           ))}

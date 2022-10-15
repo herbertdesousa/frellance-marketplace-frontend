@@ -25,6 +25,10 @@ export interface FormData {
   description: string;
   category_id: string;
   imgs: FormDataImage[];
+  price: {
+    type: 'alugar' | 'vender';
+    value: string;
+  };
   attributes: {
     id: string;
     value: string;
@@ -36,8 +40,14 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().required('obrigatório'),
   description: Yup.string()
     .required('obrigatório')
-    .min(50, 'mínimo de 50 caracteres'),
+    .min(15, 'mínimo de 15 caracteres'),
   category_id: Yup.string().required('obrigatório'),
+  price: Yup.object().shape({
+    type: Yup.string()
+      .required('obrigatório')
+      .oneOf(['alugar', 'vender'], 'inválido'),
+    value: Yup.string().required('obrigatório'),
+  }),
   imgs: Yup.array()
     .required('obrigatório')
     .min(5, 'necessário 5 imagens')
@@ -73,7 +83,7 @@ const Account: Page = () => {
   const onSubmit = useCallback(
     async (data: FormData, actions: FormikHelpers<FormData>) => {
       try {
-        const imgsUrl = await Promise.all(
+        const imgs = await Promise.all(
           data.imgs.map(async item => {
             const imageRef = firebaseStorage.ref(
               firebaseConfig.storage,
@@ -84,21 +94,26 @@ const Account: Page = () => {
               imageRef,
               item.file,
             );
-            return await firebaseStorage.getDownloadURL(snapshot.ref);
+            return {
+              url: await firebaseStorage.getDownloadURL(snapshot.ref),
+              name: item.name,
+            };
           }),
         );
 
         await api.post('/categories/items', {
           ...data,
-          imgs: imgsUrl,
+          attributes: data.attributes.filter(item => item.value),
+          imgs,
         });
 
+        router.push('/perfil/anuncios');
         actions.setSubmitting(false);
       } catch (err) {
         console.log(err);
       }
     },
-    [],
+    [router],
   );
 
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -122,6 +137,10 @@ const Account: Page = () => {
           name: '',
           description: '',
           category_id: '',
+          price: {
+            type: 'vender',
+            value: 'a combinar',
+          },
           imgs: [] as FormDataImage[],
           attributes: [] as FormData['attributes'],
         }}

@@ -26,7 +26,7 @@ const Button: Page<Props> = ({
       ${classNames({ 'bg-black text-white': variant === 'filled-dark' })}
       ${classNames({ 'bg-white text-black': variant === 'filled-light' })}
       ${classNames({ 'h-12': size === 'normal' })}
-      ${classNames({ 'py-2': size === 'sm' })}
+      ${classNames({ 'py-2 text-sm px-2': size === 'sm' })}
       ${className}
     `}
     {...rest}

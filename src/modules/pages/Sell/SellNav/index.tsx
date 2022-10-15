@@ -28,13 +28,13 @@ const SellNav: Page<Props> = ({ isScrolled, isSubmitActive, isSubmitting }) => {
       <div className="flex items-center">
         <button
           type="button"
-          className="flex items-center text-gray3 transition hover:text-black mr-4"
+          className="flex items-center text-gray3 transition hover:text-black"
           onClick={router.back}
         >
           <MdClose size={18} className="" />
         </button>
 
-        <h1 className="text-2xl font-merriweather font-bold">Vender</h1>
+        <h1 className="text-2xl font-merriweather font-bold ml-6">Vender</h1>
       </div>
 
       <Button

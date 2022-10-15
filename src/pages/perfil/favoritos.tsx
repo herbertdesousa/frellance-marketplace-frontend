@@ -6,7 +6,7 @@ import { useAuth } from '@/hooks/auth';
 
 import { ProfileNav } from '@/modules/pages/Profile';
 import { MdArrowForward, MdFavoriteBorder } from 'react-icons/md';
-import { Button } from '@/components';
+import { EmptyState } from '@/components';
 
 const data = [
   {
@@ -88,27 +88,20 @@ const Favs: Page = () => {
           </ul>
         </div> */}
 
-        <div className="mt-16 w-full flex flex-col items-center mx-auto max-w-xs text-center">
-          <div className="p-6 border border-gray1 rounded-full">
-            <MdFavoriteBorder size={24} />
-          </div>
-
-          <h1 className="text-2xl font-merriweather font-bold mt-6">
-            Nada Salvo
-          </h1>
-          <p className="mt-2 text-center text-gray3">
-            Busque por produtos e os salve, eles irão aparecer aqui.
-          </p>
-
-          <Button
-            variant="filled-dark"
-            className="mt-8"
-            onClick={() => router.push('/itens')}
-          >
-            buscar itens
-            <MdArrowForward className="ml-4" />
-          </Button>
-        </div>
+        <EmptyState
+          icon={MdFavoriteBorder}
+          title="Nada Salvo"
+          description="Busque por produtos e os salve, eles irão aparecer aqui."
+          button={{
+            title: (
+              <>
+                buscar itens
+                <MdArrowForward className="ml-4" />
+              </>
+            ),
+            onClick: () => router.push('/itens'),
+          }}
+        />
       </div>
     </>
   );

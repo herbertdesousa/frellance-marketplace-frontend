@@ -84,7 +84,7 @@ const HomeNav: Page = () => {
                 >
                   <button
                     type="button"
-                    // onClick={() => router.push(item.link)}
+                    onClick={() => router.push(`itens/${item.slug}`)}
                   >
                     {item.name.toLocaleLowerCase()}
                   </button>

@@ -5,9 +5,9 @@ import { useRouter } from 'next/router';
 import { useAuth } from '@/hooks/auth';
 
 import { ProfileNav } from '@/modules/pages/Profile';
-import { ListItem } from '@/modules/shared';
+
 import { MdArrowForward, MdAccessTime } from 'react-icons/md';
-import { Button } from '@/components';
+import { EmptyState } from '@/components';
 
 const data = [
   {
@@ -89,27 +89,20 @@ const Recents: Page = () => {
           </ul>
         </div> */}
 
-        <div className="mt-16 w-full flex flex-col items-center mx-auto max-w-xs text-center">
-          <div className="p-6 border border-gray1 rounded-full">
-            <MdAccessTime size={24} />
-          </div>
-
-          <h1 className="text-2xl font-merriweather font-bold mt-6">
-            Nada Visto Recentemente
-          </h1>
-          <p className="mt-2 text-center text-gray3">
-            Busque por produtos e os últimos visualizados aparecerão aqui.
-          </p>
-
-          <Button
-            variant="filled-dark"
-            className="mt-8"
-            onClick={() => router.push('/itens')}
-          >
-            buscar itens
-            <MdArrowForward className="ml-4" />
-          </Button>
-        </div>
+        <EmptyState
+          icon={MdAccessTime}
+          title="Nada Visto Recentemente"
+          description="Busque por produtos e os últimos visualizados aparecerão aqui."
+          button={{
+            title: (
+              <>
+                buscar itens
+                <MdArrowForward className="ml-4" />
+              </>
+            ),
+            onClick: () => router.push('/itens'),
+          }}
+        />
       </div>
     </>
   );

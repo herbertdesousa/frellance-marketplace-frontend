@@ -138,6 +138,7 @@ const SellAttributesItemAttr: Page<Props> = ({ isEditingId, attr }) => {
                   label=""
                   placeholder="Digite..."
                   className="flex-1"
+                  autoFocus={attr.type === 'writable'}
                   value={value?.id ? '' : values.attributes[fieldIndex].value}
                 />
               </div>

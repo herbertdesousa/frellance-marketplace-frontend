@@ -61,6 +61,23 @@ const SellCategories: Page = () => {
     );
   }, [errors.category_id, touched.category_id]);
 
+  const showCategories = useMemo(() => {
+    return (
+      values.imgs.length === 5 &&
+      values.name &&
+      values.description &&
+      values.price.type &&
+      values.price.value
+    );
+  }, [
+    values.description,
+    values.imgs.length,
+    values.name,
+    values.price.type,
+    values.price.value,
+  ]);
+
+  if (!showCategories) return <></>;
   return (
     <div className="mt-8">
       <h2 className="text-lg font-semibold mb-4">

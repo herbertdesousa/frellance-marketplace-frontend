@@ -25,7 +25,7 @@ interface ResponseCategory {
   slug: string;
 }
 
-interface Category {
+export interface Category {
   id: string;
   name: string;
   Icon: IconType;

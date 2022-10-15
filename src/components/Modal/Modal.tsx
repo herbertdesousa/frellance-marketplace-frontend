@@ -18,7 +18,7 @@ export interface ModalRef {
 export interface ModalProps {
   className?: string;
   children?: React.ReactNode;
-  title: string;
+  title: React.ReactNode;
   onClose?(): void;
   onClickClose?(): void;
 }
@@ -81,9 +81,11 @@ const Modal: React.ForwardRefRenderFunction<ModalRef, ModalProps> = (
         className={rootClassName}
         onTransitionEnd={() => setIsVisible(isOpened)}
       >
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="font-merriweather text-2xl font-semibold">{title}</h1>
-          <button type="button" className="" onClick={handleOnClickClose}>
+        <div className="flex justify-between items-center mb-8 w-full truncate">
+          <h1 className="font-merriweather text-2xl font-semibold truncate">
+            {title}
+          </h1>
+          <button type="button" className="ml-6" onClick={handleOnClickClose}>
             <MdClose size={24} />
           </button>
         </div>
