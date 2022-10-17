@@ -17,7 +17,6 @@ export const AuthProvider: Page = ({ children }) => {
 
   const [user, setUser] = useState<User | undefined>();
   const [isLoading, setIsLoading] = useState(true);
-  // const [hasLoadedInitialToken, setHasLoadedInitialToken] = useState(false);
   const hasLoadedInitialToken = useRef(false);
 
   const auth = useCallback(async (token: string) => {
@@ -38,6 +37,9 @@ export const AuthProvider: Page = ({ children }) => {
 
         if (credential) {
           await credential.getIdToken().then(token => auth(token));
+        }
+        if (credential === null) {
+          setIsLoading(false);
         }
       });
   }, []);

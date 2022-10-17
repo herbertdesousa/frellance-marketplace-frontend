@@ -29,7 +29,7 @@ itens/detalhes
   [x] mark as view
   é meu item?
     true:
-      [] deletar anuncio
+      [x] deletar anuncio
       ...outras features
     false:
       [] contact
@@ -45,7 +45,7 @@ attributes
   real-estates
     - km2 -> m2
 
-excessive fetching categories and items
+[] excessive fetching categories and items (cause: cleanup useEffect function)
 
 # FEATURES
 vender
@@ -60,3 +60,6 @@ attributes
   - interior color
 
 optimize firebase storage
+
+vender
+- modal are you sure for exit

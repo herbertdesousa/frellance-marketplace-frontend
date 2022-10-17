@@ -1,6 +1,6 @@
 import { Page } from '@/types/Page';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 const ListDetailsDescriptionBlock: Page<{ description: string }> = ({
@@ -9,10 +9,7 @@ const ListDetailsDescriptionBlock: Page<{ description: string }> = ({
   const [isOpened, setIsOpened] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const descriptionFormatted = useMemo(() => {
-    if (!isExpanded) return description.slice(0, 200);
-    return description;
-  }, [description, isExpanded]);
+  const [descriptionHeight, setDescriptionHeight] = useState(0);
 
   return (
     <div>
@@ -32,24 +29,30 @@ const ListDetailsDescriptionBlock: Page<{ description: string }> = ({
           className="flex flex-col relative truncate overflow-hidden"
           style={{ maxHeight: !isExpanded ? 100 : '100%' }}
         >
-          <p className="text-gray3 mt-2 whitespace-pre-wrap truncate">
+          <p
+            ref={ref => ref && setDescriptionHeight(ref?.offsetHeight)}
+            className="text-gray3 mt-2 whitespace-pre-wrap truncate"
+          >
             {description}
           </p>
 
-          <button
-            type="button"
-            className={`
+          {descriptionHeight > 90 && (
+            <button
+              type="button"
+              className={`
               underline text-primary
               ${isExpanded ? 'self-end' : 'absolute bottom-0 right-0 pl-8 pr-4'}
 
             `}
-            style={{
-              background: 'linear-gradient(90deg, rgba(0, 0, 0, 0), white 15%)',
-            }}
-            onClick={() => setIsExpanded(st => !st)}
-          >
-            {isExpanded ? 'Ler Menos' : 'Ler Mais'}
-          </button>
+              style={{
+                background:
+                  'linear-gradient(90deg, rgba(0, 0, 0, 0), white 15%)',
+              }}
+              onClick={() => setIsExpanded(st => !st)}
+            >
+              {isExpanded ? 'Ler Menos' : 'Ler Mais'}
+            </button>
+          )}
         </div>
       )}
     </div>

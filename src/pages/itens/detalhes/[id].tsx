@@ -3,7 +3,7 @@ import { Page } from '@/types/Page';
 import { useRouter } from 'next/router';
 
 import {
-  ListDetailsContact,
+  ListDetailsInfo,
   ListDetailsDescription,
   ListDetailsImage,
   ListDetailsNav,
@@ -30,6 +30,7 @@ export interface ItemDetailsAttribute {
 
 export interface ItemDetails {
   id: string;
+  userId: string;
   name: string;
   description: string;
   price: { type: 'alugar' | 'vender'; value: string };
@@ -42,14 +43,14 @@ const Details: Page<{ item?: ItemDetails }> = ({ item }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!router.isFallback && item) {
+    if (item) {
       api.post(
         '/users/preferences',
         {},
         { params: { type: 'recent-view', itemId: item.id } },
       );
     }
-  }, [item, router.isFallback]);
+  }, []);
 
   if (router.isFallback)
     return (
@@ -77,7 +78,7 @@ const Details: Page<{ item?: ItemDetails }> = ({ item }) => {
       </div>
     );
   return (
-    <div className="min-h-screen pb-20 md:pb-0">
+    <div className="min-h-screen md:pb-0">
       <ListDetailsNav id={item.id} />
 
       <ListDetailsImage pictures={item.pictures} />
@@ -88,7 +89,7 @@ const Details: Page<{ item?: ItemDetails }> = ({ item }) => {
         </div>
 
         <div className="col-span-3 lg:col-span-2">
-          <ListDetailsContact />
+          <ListDetailsInfo itemId={item.id} userId={item.userId} />
         </div>
       </div>
 

@@ -46,7 +46,7 @@ const ListItem: Page<Props> = ({
           />
         </div>
 
-        <div className="mt-3">
+        <div className={`mt-3 ${style['item-width-measures']}`}>
           <strong>{item.price}</strong>
           <p className="text-gray3 whitespace-nowrap overflow-hidden truncate">
             {item.description}

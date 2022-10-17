@@ -25,6 +25,7 @@ interface Adversite {
   name: string;
   category: { name: string; iconName: string };
   pictures: { url: string }[];
+  anayltics: { views: number; requestContacts: number };
 }
 
 const Adversites: Page = () => {
@@ -34,7 +35,6 @@ const Adversites: Page = () => {
 
   const { data, error } = useSWR<Adversite[]>(
     auth.user && !auth.loading.state && 'categories/items',
-    { revalidateOnFocus: false },
   );
 
   useEffect(() => {
@@ -94,7 +94,7 @@ const Adversites: Page = () => {
                             <div>
                               <span className="text-gray3 mb-0.5">Visitas</span>
                               <h3 className="text-lg font-semibold">
-                                5 Visistas
+                                {`${item.anayltics.views} Visitas`}
                               </h3>
                             </div>
                             <div
@@ -106,7 +106,7 @@ const Adversites: Page = () => {
                                 Botão entrar em contato
                               </span>
                               <h3 className="text-lg font-semibold">
-                                5 Cliques
+                                {`${item.anayltics.requestContacts} Cliques`}
                               </h3>
                             </div>
                             <div

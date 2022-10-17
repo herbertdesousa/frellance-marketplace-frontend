@@ -5,7 +5,7 @@
   min-height: 128px;
 }
 
-.item-place-measures {
+.item-width-measures {
   width: 128px;
   min-width: 128px;
 }
@@ -18,7 +18,7 @@
     min-height: 192px;
   }
 
-  .item-place-measures {
+  .item-width-measures {
     width: 192px;
     min-width: 192px;
   }
@@ -32,7 +32,7 @@
     min-height: 208px;
   }
 
-  .item-place-measures {
+  .item-width-measures {
     width: 208px;
     min-width: 208px;
   }
