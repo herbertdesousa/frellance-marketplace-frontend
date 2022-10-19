@@ -34,7 +34,7 @@ const Adversites: Page = () => {
   const { modalRef } = useModal();
 
   const { data, error } = useSWR<Adversite[]>(
-    auth.user && !auth.loading.state && 'categories/items',
+    auth.user && !auth.loading.state && 'categories/items/user',
   );
 
   useEffect(() => {

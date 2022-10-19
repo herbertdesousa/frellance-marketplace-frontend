@@ -1,5 +1,5 @@
 import { Page } from '@/types/Page';
-import { MdMenu, MdSearch } from 'react-icons/md';
+import { MdMenu } from 'react-icons/md';
 
 import Link from 'next/link';
 
@@ -11,17 +11,18 @@ const ListNavTop: Page = () => {
   return (
     <div className="flex items-center justify-between py-5 max-width">
       <Link href="/">
-        <div className="w-12 h-12 bg-gray3 rounded" />
+        {/* w-12 */}
+        <div className="w-32 h-12 bg-gray3 rounded" />
       </Link>
 
-      <div className="h-12 mx-6 p-3 flex flex-1 bg-gray0.5 max-w-xs">
+      {/* <div className="h-12 mx-6 p-3 flex flex-1 bg-gray0.5 max-w-xs">
         <MdSearch size={24} />
         <input
           type="text"
           className="flex flex-1 bg-transparent ml-3 w-full"
           placeholder="Procure por Marcas"
         />
-      </div>
+      </div> */}
 
       <button
         type="button"

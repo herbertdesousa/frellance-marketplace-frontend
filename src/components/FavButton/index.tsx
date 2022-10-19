@@ -1,5 +1,6 @@
 import { api } from '@/services/api';
 import { Page } from '@/types/Page';
+import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 
 import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
@@ -34,6 +35,24 @@ const FavButton: Page<Props> = ({
       clearInterval(myInterval);
     };
   });
+
+  useEffect(() => {
+    let unmounted = false;
+    const source = axios.CancelToken.source();
+
+    api
+      .get('/categories/items/favorited', {
+        params: { id: itemId },
+      })
+      .then(response => {
+        if (unmounted) setIsFavorited(response.data.value);
+      });
+
+    return () => {
+      unmounted = true;
+      source.cancel('Cancelling in cleanup');
+    };
+  }, [itemId]);
 
   const onFavorited = useCallback(async () => {
     await api.post(

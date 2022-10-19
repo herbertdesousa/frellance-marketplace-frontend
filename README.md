@@ -1,9 +1,9 @@
 # TIMELINE
 home
   hero
-    [] itens em alta *1
-  em alta
-    [] itens em alta *1
+    [x] itens em alta *1
+  ultimos postados
+    [x] ultimos itens postados
 
 ---
 perfil/anuncios *criar
@@ -18,11 +18,11 @@ perfil/ultimos-vistos
 
 ---
 itens
-  [] itens em alta *1
+  [x] itens em alta *1
 
 itens/[categories]
-  [] filtros
-  [] buscador
+  [-] filtros
+  [-] buscador
 
 itens/detalhes
   [x] fetch
@@ -32,7 +32,7 @@ itens/detalhes
       [x] deletar anuncio
       ...outras features
     false:
-      [] contact
+      [x] contact
 
 # CHORES
 home

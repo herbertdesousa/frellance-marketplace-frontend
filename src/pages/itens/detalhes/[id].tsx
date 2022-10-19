@@ -15,7 +15,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { TbError404 } from 'react-icons/tb';
 import { MdArrowForward } from 'react-icons/md';
 
-import { Category } from '@/hooks/categories';
+import { Category } from '@/types/Category';
 import { api } from '@/services/api';
 import { useEffect } from 'react';
 

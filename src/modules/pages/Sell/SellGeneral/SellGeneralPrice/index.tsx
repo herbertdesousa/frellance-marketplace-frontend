@@ -25,9 +25,9 @@ const SellGeneralPrice: Page = () => {
         <Radio
           name="price.value"
           label="Fixo"
-          value={props.value === 'a combinar' ? '' : props.value}
+          value={props.value === 'A Combinar' ? '' : props.value}
         />
-        {props.value !== 'a combinar' && (
+        {props.value !== 'A Combinar' && (
           <TextField
             name="price.value"
             label="Preço Fixo"

@@ -49,13 +49,7 @@ const Recents: Page = () => {
           <ul className="grid gap-x-4 md:grid-cols-2 lg:grid-cols-4">
             {!!data &&
               data.length > 0 &&
-              data.map(item => (
-                <ListItem
-                  key={item.id}
-                  item={item}
-                  isFavorited={item.favorited}
-                />
-              ))}
+              data.map(item => <ListItem key={item.id} item={item} />)}
           </ul>
         </div>
 

@@ -2,8 +2,6 @@ import { Page } from '@/types/Page';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { FavButton } from '@/components';
-
 import style from './ListItem.module.css';
 
 interface Props {
@@ -14,14 +12,12 @@ interface Props {
     price: string;
     description: string;
   };
-  isFavorited?: boolean;
   imgMeasureType?: 'square' | 'fill';
 }
 
 const ListItem: Page<Props> = ({
   className,
   item,
-  isFavorited = false,
   imgMeasureType = 'fill',
 }) => {
   const router = useRouter();
@@ -30,7 +26,7 @@ const ListItem: Page<Props> = ({
     <li className={`relative mb-6 ${className}`}>
       <button
         type="button"
-        className="relative w-full text-left hover:underline"
+        className="relative w-full text-left truncate hover:underline"
         onClick={() => router.push(`/itens/detalhes/${item.id}`)}
       >
         <div
@@ -46,15 +42,19 @@ const ListItem: Page<Props> = ({
           />
         </div>
 
-        <div className={`mt-3 ${style['item-width-measures']}`}>
-          <strong>{item.price}</strong>
+        <div
+          className={`mt-3 ${
+            imgMeasureType === 'square'
+              ? style['item-bottom-square-measures']
+              : style['item-bottom-fill-measures']
+          }`}
+        >
+          <strong className="truncate overflow-hidden">{item.price}</strong>
           <p className="text-gray3 whitespace-nowrap overflow-hidden truncate">
             {item.description}
           </p>
         </div>
       </button>
-
-      <FavButton defaultValue={isFavorited} itemId={item.id} />
     </li>
   );
 };

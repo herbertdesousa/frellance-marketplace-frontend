@@ -3,7 +3,8 @@ import { Page } from '@/types/Page';
 
 import useSWR from 'swr';
 import * as Icons from 'react-icons/fi';
-import { IconType } from 'react-icons';
+
+import { Category } from '@/types/Category';
 
 const CategoriesContext = createContext<CategoriesType>({} as CategoriesType);
 
@@ -21,14 +22,6 @@ interface ResponseCategory {
   id: string;
   name: string;
   iconName: string;
-  img_url: string;
-  slug: string;
-}
-
-export interface Category {
-  id: string;
-  name: string;
-  Icon: IconType;
   img_url: string;
   slug: string;
 }

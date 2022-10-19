@@ -5,7 +5,11 @@
   min-height: 128px;
 }
 
-.item-width-measures {
+.item-bottom-fill-measures {
+  width: calc(100vw - 24px * 2);
+  min-width: calc(100vw - 24px * 2);
+}
+.item-bottom-square-measures {
   width: 128px;
   min-width: 128px;
 }
@@ -18,7 +22,11 @@
     min-height: 192px;
   }
 
-  .item-width-measures {
+  .item-bottom-fill-measures {
+    width: 100%;
+    min-width: 100%;
+  }
+  .item-bottom-square-measures {
     width: 192px;
     min-width: 192px;
   }
@@ -32,7 +40,11 @@
     min-height: 208px;
   }
 
-  .item-width-measures {
+  .item-bottom-fill-measures {
+    width: 100%;
+    min-width: 100%;
+  }
+  .item-bottom-square-measures {
     width: 208px;
     min-width: 208px;
   }

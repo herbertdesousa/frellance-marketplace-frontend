@@ -1,61 +1,15 @@
 import { Page } from '@/types/Page';
+import { GetStaticProps } from 'next';
 
-import ListNav from '@/modules/pages/List/ListNav';
+import { api } from '@/services/api';
 import { CategoriesCarrousel, ListItem } from '@/modules/shared';
 import { Footer } from '@/components';
 
-const data = [
-  {
-    id: 'id-123',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-456',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-789',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-753',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-159',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-156',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-354',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-  {
-    id: 'id-756',
-    img: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80',
-    price: 'R$ 18.800,00',
-    description: '2010 Ferrari 599',
-  },
-];
+import ListNav from '@/modules/pages/List/ListNav';
 
-const List: Page = () => {
+import { Item } from '@/types/Item';
+
+const List: Page<{ data: Item[] }> = ({ data }) => {
   return (
     <>
       <div className="border-b border-gray0.5">
@@ -81,6 +35,19 @@ const List: Page = () => {
       <Footer />
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await api.get('/categories/items', {
+    params: { limit: 21, mostView: true },
+  });
+
+  return {
+    props: {
+      data: response.data,
+    },
+    revalidate: 30,
+  };
 };
 
 export default List;
