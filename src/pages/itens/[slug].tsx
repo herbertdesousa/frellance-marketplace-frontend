@@ -45,7 +45,7 @@ const ListSlug: Page<Props> = ({ item }) => {
       </div>
     );
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <ListNav.ListNavWrapper>
         <div className="border-b border-gray1">
           <ListNav.ListNavTop />
@@ -53,7 +53,7 @@ const ListSlug: Page<Props> = ({ item }) => {
         {/* <ListNav.ListNavFilters /> */}
       </ListNav.ListNavWrapper>
 
-      <div className="pt-6 max-width">
+      <div className="pt-6 max-width flex flex-col flex-1">
         <div className="mb-6">
           <BreadCrumb
             data={[
@@ -75,7 +75,7 @@ const ListSlug: Page<Props> = ({ item }) => {
       </div>
 
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -93,7 +93,7 @@ const Details: Page<{ item?: ItemDetails }> = ({ item }) => {
         </div>
       </div>
 
-      <ListDetailsRelated />
+      {/* <ListDetailsRelated /> */}
 
       <Footer />
     </div>

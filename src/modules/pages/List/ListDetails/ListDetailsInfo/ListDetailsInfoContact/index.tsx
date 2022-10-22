@@ -33,7 +33,7 @@ const ListDetailsInfoContact: Page<Props> = ({ itemId, userId }) => {
       return;
     }
 
-    const finded = await api.get<Contact[]>('/users/contacts', {
+    const finded = await api.get<Contact[]>('/users/contacts/item', {
       params: { itemId, ownerItemUserId: userId },
     });
 

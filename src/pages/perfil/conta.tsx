@@ -49,9 +49,9 @@ const Account: Page = () => {
   const updateNotificationOnChatMessages = useCallback(
     async (value: boolean) => {
       await api.put(
-        'users/user_notification_on_chat_messages',
+        `users/user_notification_on_chat_messages`,
         {},
-        { params: { value } },
+        { params: { value: value ? 1 : 0 } },
       );
       auth.refreshUser(old => ({ ...old, notificationOnChatMessages: value }));
     },

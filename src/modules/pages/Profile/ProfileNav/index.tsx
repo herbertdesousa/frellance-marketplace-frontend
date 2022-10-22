@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 
 const data = [
   { label: 'Conta', link: '/perfil/conta' },
-  { label: 'Chat', link: '/perfil/chat' },
+  // { label: 'Chat', link: '/perfil/chat' },
   { label: 'Favoritos', link: '/perfil/favoritos' },
   { label: 'Últimos Vistos', link: '/perfil/recentes' },
   { label: 'Anúncios', link: '/perfil/anuncios' },
