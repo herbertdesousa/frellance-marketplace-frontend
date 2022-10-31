@@ -139,7 +139,7 @@ const Account: Page = () => {
           category_id: '',
           price: {
             type: 'vender',
-            value: 'a combinar',
+            value: 'A Combinar',
           },
           imgs: [] as FormDataImage[],
           attributes: [] as FormData['attributes'],
