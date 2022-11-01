@@ -4,6 +4,9 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: ['images.unsplash.com', 'lh3.googleusercontent.com', 'firebasestorage.googleapis.com']
+  },
+  env: {
+    API_URL: process.env.API_URL,
   }
 }
 

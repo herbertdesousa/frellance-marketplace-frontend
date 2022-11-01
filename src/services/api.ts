@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const baseApiURl = 'http://localhost:3333';
+const baseURL = process.env.API_URL;
 
 export const api = axios.create({
-  baseURL: baseApiURl,
+  baseURL,
 });
 
 export const adminApi = axios.create({
-  baseURL: baseApiURl,
+  baseURL,
 });
