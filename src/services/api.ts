@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+const baseApiURl = 'http://localhost:3333';
+
 export const api = axios.create({
-  baseURL: 'https://159.223.179.117:3333',
+  baseURL: baseApiURl,
+});
+
+export const adminApi = axios.create({
+  baseURL: baseApiURl,
 });

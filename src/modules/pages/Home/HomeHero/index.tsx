@@ -47,8 +47,6 @@ const HomeHero: Page<{ data: Item[] }> = ({ data }) => {
     changeSelectedBgCarrousel(data[currentSelectedItemIndex - 1]);
   }, [currentSelectedItemIndex, data]);
 
-  console.log(data[0].img);
-
   return (
     <header
       className="relative w-screen"
