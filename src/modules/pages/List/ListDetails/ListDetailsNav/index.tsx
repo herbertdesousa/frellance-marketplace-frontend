@@ -1,5 +1,5 @@
 import { Page } from '@/types/Page';
-import { MdChevronLeft, MdShare } from 'react-icons/md';
+import { MdChevronLeft } from 'react-icons/md';
 
 import { useRouter } from 'next/router';
 
@@ -24,13 +24,13 @@ const ListDetailsNav: Page<{ id: string }> = ({ id }) => {
       </button>
 
       <div className="relative">
-        <button
+        {/* <button
           type="button"
           className="p-1.5 bg-white rounded-full md:border border-gray1"
           style={{ marginRight: 36 + 8 }}
         >
           <MdShare size={24} />
-        </button>
+        </button> */}
         <FavButton
           itemId={id}
           className="top-0"
