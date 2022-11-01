@@ -2,6 +2,7 @@ import { Page } from '@/types/Page';
 import { MdMenu } from 'react-icons/md';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { useSideMenu } from '@/hooks/sideMenu';
 
@@ -12,7 +13,12 @@ const ListNavTop: Page = () => {
     <div className="flex items-center justify-between py-5 max-width">
       <Link href="/">
         {/* w-12 */}
-        <div className="w-32 h-12 bg-gray3 rounded" />
+        <Image
+          src="/logo/black.png"
+          height={48}
+          width={160}
+          objectFit="contain"
+        />
       </Link>
 
       {/* <div className="h-12 mx-6 p-3 flex flex-1 bg-gray0.5 max-w-xs">
