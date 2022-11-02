@@ -1,5 +1,6 @@
 import { Page } from '@/types/Page';
 import { GetStaticProps } from 'next';
+import Head from 'next/head';
 
 import { api } from '@/services/api';
 import { CategoriesCarrousel, ListItem } from '@/modules/shared';
@@ -12,6 +13,10 @@ import { Item } from '@/types/Item';
 const List: Page<{ data: Item[] }> = ({ data }) => {
   return (
     <>
+      <Head>
+        <title>Premium List - Itens</title>
+      </Head>
+
       <div className="border-b border-gray0.5">
         <ListNav.ListNavWrapper>
           <ListNav.ListNavTop />

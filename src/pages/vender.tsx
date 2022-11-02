@@ -1,5 +1,6 @@
 import { Page } from '@/types/Page';
 import { useCallback, useEffect, useState } from 'react';
+import Head from 'next/head';
 
 import * as firebaseStorage from 'firebase/storage';
 import firebaseConfig from '@/config/firebase-config';
@@ -132,6 +133,9 @@ const Account: Page = () => {
   if (!auth.user) return <></>;
   return (
     <div className="relative max-width mt-10">
+      <Head>
+        <title>Premium List - Vender</title>
+      </Head>
       <Formik
         initialValues={{
           name: '',

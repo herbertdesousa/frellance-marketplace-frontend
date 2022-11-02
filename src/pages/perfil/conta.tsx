@@ -1,5 +1,6 @@
 import { Page } from '@/types/Page';
 import { useCallback, useEffect, useState } from 'react';
+import Head from 'next/head';
 import Image from 'next/image';
 
 import { Formik } from 'formik';
@@ -61,6 +62,9 @@ const Account: Page = () => {
   if (!auth.user) return <></>;
   return (
     <>
+      <Head>
+        <title>Premium List - Perfil</title>
+      </Head>
       <ProfileNav />
 
       <div className="max-width mt-10">

@@ -1,5 +1,6 @@
 import { useAuth } from '@/hooks/auth';
 import { useEffect } from 'react';
+import Head from 'next/head';
 import { Page } from '@/types/Page';
 
 import { useRouter } from 'next/router';
@@ -52,6 +53,9 @@ const Adversites: Page = () => {
   if (!auth.user) return <></>;
   return (
     <>
+      <Head>
+        <title>Premium List - Perfil</title>
+      </Head>
       <ProfileNav />
 
       <div className="max-width mt-10 pb-8">

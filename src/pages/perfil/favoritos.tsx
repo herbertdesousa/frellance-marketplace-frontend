@@ -1,4 +1,5 @@
 import { Page } from '@/types/Page';
+import Head from 'next/head';
 import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
@@ -36,6 +37,9 @@ const Favs: Page = () => {
   if (!auth.user) return <></>;
   return (
     <>
+      <Head>
+        <title>Premium List - Perfil</title>
+      </Head>
       <ProfileNav />
 
       <div className="mt-10 max-width">

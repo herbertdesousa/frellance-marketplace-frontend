@@ -1,6 +1,7 @@
 import { Page } from '@/types/Page';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 import { ListNav } from '@/modules/pages/List';
 import { BreadCrumb, EmptyState, Footer } from '@/components';
@@ -22,12 +23,18 @@ const ListSlug: Page<Props> = ({ item }) => {
   if (router.isFallback)
     return (
       <div className="flex items-center justify-center w-screen h-screen">
+        <Head>
+          <title>Premium List - Carregando</title>
+        </Head>
         <p>Carregando...</p>
       </div>
     );
   if (!item)
     return (
       <div className="max-width h-screen flex items-center justify-center">
+        <Head>
+          <title>Premium List - Não Encontrado</title>
+        </Head>
         <EmptyState
           icon={TbError404}
           title="Anúncio Não Encontrado"
@@ -46,6 +53,10 @@ const ListSlug: Page<Props> = ({ item }) => {
     );
   return (
     <div className="min-h-screen flex flex-col">
+      <Head>
+        <title>{`Premium List - ${item.category.name}`}</title>
+      </Head>
+
       <ListNav.ListNavWrapper>
         <div className="border-b border-gray1">
           <ListNav.ListNavTop />

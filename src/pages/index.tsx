@@ -1,4 +1,5 @@
 import { Page } from '@/types/Page';
+import Head from 'next/head';
 
 import {
   HomeFeatures,
@@ -16,6 +17,9 @@ import { Item } from '@/types/Item';
 const Home: Page<{ features: Item[]; hero: Item[] }> = ({ features, hero }) => {
   return (
     <>
+      <Head>
+        <title>Premium List - Mais Luxuosos Itens Brasileiros</title>
+      </Head>
       <HomeNav />
       <HomeHero data={hero} />
       <CategoriesCarrousel className="mt-12" />

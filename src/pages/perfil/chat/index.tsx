@@ -1,4 +1,5 @@
 import { Page } from '@/types/Page';
+import Head from 'next/head';
 
 import { useEffect, useState } from 'react';
 import { ProfileNav } from '@/modules/pages/Profile';
@@ -28,6 +29,10 @@ const Chat: Page = () => {
 
   return (
     <>
+      <Head>
+        <title>Premium List - Perfil</title>
+      </Head>
+
       <div ref={ref => ref && setNavHeight(ref.offsetHeight)}>
         <ProfileNav />
       </div>

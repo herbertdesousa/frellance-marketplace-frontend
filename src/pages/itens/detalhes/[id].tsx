@@ -1,4 +1,5 @@
 import { Page } from '@/types/Page';
+import Head from 'next/head';
 
 import { useRouter } from 'next/router';
 
@@ -7,7 +8,6 @@ import {
   ListDetailsDescription,
   ListDetailsImage,
   ListDetailsNav,
-  ListDetailsRelated,
 } from '@/modules/pages/List/ListDetails';
 import { EmptyState, Footer } from '@/components';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -55,12 +55,18 @@ const Details: Page<{ item?: ItemDetails }> = ({ item }) => {
   if (router.isFallback)
     return (
       <div className="flex items-center justify-center w-screen h-screen">
+        <Head>
+          <title>Premium List - Carregando</title>
+        </Head>
         <p>Carregando...</p>
       </div>
     );
   if (!item)
     return (
       <div className="max-width h-screen flex items-center justify-center">
+        <Head>
+          <title>Premium List - Não Encontrado</title>
+        </Head>
         <EmptyState
           icon={TbError404}
           title="Anúncio Não Encontrado"
@@ -79,6 +85,10 @@ const Details: Page<{ item?: ItemDetails }> = ({ item }) => {
     );
   return (
     <div className="min-h-screen md:pb-0">
+      <Head>
+        <title>{`Premium List - ${item.name}`}</title>
+      </Head>
+
       <ListDetailsNav id={item.id} />
 
       <ListDetailsImage pictures={item.pictures} />

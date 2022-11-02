@@ -1,4 +1,5 @@
 import { Page } from '@/types/Page';
+import Head from 'next/head';
 
 import { AdminAuth, AdminDashHero } from '@/modules/pages/Admin';
 
@@ -9,6 +10,9 @@ const Admin: Page = () => {
 
   return (
     <>
+      <Head>
+        <title>Premium List - Admin</title>
+      </Head>
       {!isAuthed && <AdminAuth onAuthed={() => setIsAuthed(true)} />}
       {isAuthed && <AdminDashHero />}
     </>
