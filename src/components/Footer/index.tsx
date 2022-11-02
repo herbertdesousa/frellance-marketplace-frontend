@@ -1,4 +1,5 @@
 import { Page } from '@/types/Page';
+import Image from 'next/image';
 
 import { useCategories } from '@/hooks/categories';
 import { useRouter } from 'next/router';
@@ -42,8 +43,13 @@ const HomeFooter: Page = () => {
       <div className="w-full bg-gray3 rounded my-6" style={{ height: 1 }} />
 
       <div className="flex items-center">
-        <div className="w-24 h-9 bg-gray3 rounded" />
-        <p className="text-white ml-4 text-xs">Copyright © 2022 Enterprise</p>
+        <Image
+          src="/logo/white.png"
+          height={32}
+          width={148}
+          objectFit="contain"
+        />
+        <p className="text-white ml-4 text-xs">Copyright © 2022 Premium List</p>
       </div>
     </footer>
   );
