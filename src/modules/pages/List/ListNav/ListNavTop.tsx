@@ -13,12 +13,7 @@ const ListNavTop: Page = () => {
     <div className="flex items-center justify-between py-5 max-width">
       <Link href="/">
         {/* w-12 */}
-        <Image
-          src="/logo/black-line.png"
-          height={64}
-          width={64}
-          objectFit="cover"
-        />
+        <Image src="/logo/black.png" height={64} width={64} objectFit="cover" />
       </Link>
 
       {/* <div className="h-12 mx-6 p-3 flex flex-1 bg-gray0.5 max-w-xs">
