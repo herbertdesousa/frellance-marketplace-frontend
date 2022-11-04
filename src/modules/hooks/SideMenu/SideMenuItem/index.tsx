@@ -16,7 +16,7 @@ const SideMenuItem: Page<Props> = ({ isFirst, label, Icon, onClick }) => {
         type="button"
         onClick={onClick}
         className={`
-          flex items-center py-2 px-4 bg-white  w-full transition
+          flex items-center py-2 px-4 bg-white w-full transition hover:bg-gray0.5
           ${isFirst ? '' : 'mt-2'}
         `}
       >

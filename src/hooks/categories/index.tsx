@@ -24,6 +24,7 @@ interface ResponseCategory {
   iconName: string;
   img_url: string;
   slug: string;
+  relevance: number;
 }
 
 interface CategoriesType {
@@ -38,11 +39,15 @@ const CategoriesProvider: Page = ({ children }) => {
   const formattedData = useMemo((): Category[] => {
     if (!data) return [];
 
-    return data.map(item => ({
-      ...item,
-      Icon: Icons[item.iconName as 'FiActivity'],
-    }));
+    return data
+      .sort((a, b) => b.relevance - a.relevance)
+      .map(item => ({
+        ...item,
+        Icon: Icons[item.iconName as 'FiActivity'],
+      }));
   }, [data]);
+
+  console.log(formattedData);
 
   return (
     <CategoriesContext.Provider
