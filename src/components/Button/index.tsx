@@ -20,7 +20,7 @@ const Button: Page<Props> = ({
     type="button"
     className={`w-full  uppercase font-medium transition flex items-center justify-center
       ${classNames({
-        'border border-gray2 text-black hover:border-gray2':
+        'border border-gray2 text-black hover:border-gray3':
           variant === 'outline',
       })}
       ${classNames({ 'bg-black text-white': variant === 'filled-dark' })}

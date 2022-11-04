@@ -10,6 +10,8 @@ module.exports = {
       'red': 'var(--red)',
       'red-opaque': 'var(--red-opaque)',
 
+      'green': 'var(--green)',
+
       'white': 'var(--white)',
       'white-opaque': 'var(--white-opaque)',
       'gray0.5': 'var(--gray05)',

@@ -4,10 +4,9 @@ import { useCallback, useState } from 'react';
 import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
-import { adminApi } from '@/services/api';
-
 import { Button, TextField } from '@/components';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
+import { useAdminAuth } from '@/hooks/adminAuth';
 
 interface FormData {
   email: string;
@@ -19,11 +18,9 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required('obrigatório'),
 });
 
-interface Props {
-  onAuthed(): void;
-}
+const AdminAuth: Page = () => {
+  const { auth } = useAdminAuth();
 
-const AdminAuth: Page<Props> = ({ onAuthed }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const onSubmit = useCallback(
@@ -31,16 +28,12 @@ const AdminAuth: Page<Props> = ({ onAuthed }) => {
       actions.setErrors({});
 
       try {
-        adminApi.defaults.auth = { username: dt.email, password: dt.password };
-
-        await adminApi.post('/admin');
-
-        onAuthed();
+        await auth(dt);
       } catch (error) {
         actions.setErrors({ email: 'inválido', password: 'inválido' });
       }
     },
-    [],
+    [auth],
   );
 
   return (

@@ -26,10 +26,10 @@ const AdminDashHeroNonSelected: Page<Props> = ({
   addToHomeHero,
   searchText,
 }) => {
-  const [isOpened, setIsOpened] = useState(true);
+  const [isOpened, setIsOpened] = useState(false);
 
   return (
-    <div className="mt-8 w-full pb-16">
+    <div className="w-full pb-16">
       <div className="flex items-center mt-8">
         <h2 className="text-lg font-medium">Não Selecionados</h2>
 

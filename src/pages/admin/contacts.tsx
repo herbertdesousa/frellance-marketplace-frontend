@@ -1,22 +1,22 @@
 import { Page } from '@/types/Page';
 import Head from 'next/head';
 
-import { AdminAuth, AdminHome } from '@/modules/pages/Admin';
+import { AdminAuth, AdminContacts } from '@/modules/pages/Admin';
 
 import { useAdminAuth } from '@/hooks/adminAuth';
 
-const Admin: Page = () => {
+const AdminItemsHome: Page = () => {
   const { isAuthed } = useAdminAuth();
 
   return (
     <>
       <Head>
-        <title>Admin Premium List</title>
+        <title>Admin Premium List - Itens na Home</title>
       </Head>
       {!isAuthed && <AdminAuth />}
-      {isAuthed && <AdminHome />}
+      {isAuthed && <AdminContacts />}
     </>
   );
 };
 
-export default Admin;
+export default AdminItemsHome;

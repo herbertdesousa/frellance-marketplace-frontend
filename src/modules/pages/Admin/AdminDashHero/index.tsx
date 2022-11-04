@@ -1,6 +1,8 @@
 import { Page } from '@/types/Page';
 import { useCallback, useState } from 'react';
 
+import { useRouter } from 'next/router';
+
 import { Item } from '@/types/Item';
 
 import { useModal } from '@/hooks/modal';
@@ -8,13 +10,16 @@ import { useModal } from '@/hooks/modal';
 import useSWR from 'swr';
 import { adminApi } from '@/services/api';
 
+import { MdChevronLeft } from 'react-icons/md';
 import AdminDashHeroNonSelected from './AdminDashHeroNonSelected';
 import AdminDashHeroSelected from './AdminDashHeroSelected';
+import AdminNav from '../components/AdminNav';
 
 export type ItemSelect = Item & { selectedOnHome: boolean };
 
 const AdminDashHero: Page = () => {
   const { modalRef } = useModal();
+  const router = useRouter();
 
   const [searchText, setSearchText] = useState('');
   const order = searchText ? '' : 'order=desc';
@@ -49,9 +54,7 @@ const AdminDashHero: Page = () => {
 
   return (
     <div className="relative max-width">
-      <h1 className="text-2xl font-merriweather font-bold mt-8">
-        Seleção de Produtos na Home
-      </h1>
+      <AdminNav title="Seleção de Produtos na Home" />
 
       <AdminDashHeroSelected
         data={selectedSWR.data}

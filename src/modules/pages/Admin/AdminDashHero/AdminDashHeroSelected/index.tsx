@@ -16,10 +16,10 @@ interface Props {
 }
 
 const AdminDashHeroSelected: Page<Props> = ({ data, removeFromHomeHero }) => {
-  const [isOpened, setIsOpened] = useState(true);
+  const [isOpened, setIsOpened] = useState(false);
 
   return (
-    <div className="mt-8 w-full">
+    <div className="w-full">
       <div className="flex items-center mt-8">
         <h2 className="text-lg font-medium">Selecionados</h2>
 
