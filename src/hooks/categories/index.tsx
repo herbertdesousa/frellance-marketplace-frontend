@@ -47,8 +47,6 @@ const CategoriesProvider: Page = ({ children }) => {
       }));
   }, [data]);
 
-  console.log(formattedData);
-
   return (
     <CategoriesContext.Provider
       value={{

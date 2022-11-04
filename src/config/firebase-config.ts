@@ -3,13 +3,13 @@ import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 
 const app = initializeApp({
-  apiKey: 'AIzaSyDuRNmus5-ubIs3IfQQV-t9ieAcyMDMu0E',
-  authDomain: 'frellance-marketplace.firebaseapp.com',
-  projectId: 'frellance-marketplace',
-  storageBucket: 'frellance-marketplace.appspot.com',
-  messagingSenderId: '220025258693',
-  appId: '1:220025258693:web:6f29c39ce5d1db23fb26ac',
-  measurementId: 'G-XHB68WMBCY',
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEANSUREMENT_ID,
 });
 
 const auth = getAuth(app);
