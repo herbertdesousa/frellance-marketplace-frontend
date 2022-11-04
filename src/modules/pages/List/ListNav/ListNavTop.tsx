@@ -14,10 +14,10 @@ const ListNavTop: Page = () => {
       <Link href="/">
         {/* w-12 */}
         <Image
-          src="/logo/black.png"
-          height={48}
-          width={160}
-          objectFit="contain"
+          src="/logo/black-line.png"
+          height={64}
+          width={64}
+          objectFit="cover"
         />
       </Link>
 
