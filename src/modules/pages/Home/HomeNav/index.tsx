@@ -26,7 +26,7 @@ const HomeNav: Page = () => {
     <>
       <Nav variant="transparent">
         <div className="w-full border-t border-b border-gray3 whitespace-nowrap">
-          <ul className="flex items-center text-xs text-white py-2 md:text-sm max-width">
+          <ul className="flex items-center text-xs text-white py-2 md:text-base max-width">
             <li className="mr-3 hover:text-gray1 transition">
               <button type="button" onClick={() => router.push('/itens')}>
                 buscar itens
@@ -37,7 +37,7 @@ const HomeNav: Page = () => {
                 comece a vender
               </button>
             </li>
-            <div className="w-0.5 h-2.5 bg-gray2 mx-3" />
+            <div className="w-0.5 h-4 bg-gray2 mx-3" />
 
             <li
               ref={categoriesDropdownRef}

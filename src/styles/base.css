@@ -67,6 +67,11 @@ body::-webkit-scrollbar {
 
 .no-scroll::-webkit-scrollbar {
   display: none;
+  -ms-overflow-style: none;
+}
+.no-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 .max-width {
