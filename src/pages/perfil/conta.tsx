@@ -1,5 +1,5 @@
 import { Page } from '@/types/Page';
-import { useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
@@ -17,6 +17,9 @@ import {
   ProfileAccountItem,
 } from '@/modules/pages/Profile/ProfileAccount';
 import { api } from '@/services/api';
+import { MdCameraAlt, MdError } from 'react-icons/md';
+
+import { User } from '@/hooks/auth/types';
 
 const validationSchemaNameForm = Yup.object().shape({
   name: Yup.string().required('obrigatório'),
@@ -59,6 +62,36 @@ const Account: Page = () => {
     [auth],
   );
 
+  const [isUploadingPicture, setIsUploadingPicture] = useState(false);
+  const [uploadPictureError, setUploadPictureError] = useState('');
+
+  const uploadPicture = useCallback(
+    async (evt: ChangeEvent<HTMLInputElement>) => {
+      if (!evt || !evt.target.files || !evt.target.files[0]) return;
+
+      setIsUploadingPicture(true);
+      setUploadPictureError('');
+
+      const formData = new FormData();
+
+      formData.append('picture', evt.target.files[0]);
+
+      try {
+        const user = await api.post<User>('users/picture', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+
+        await auth.refreshUser(old => ({ ...old, picture: user.data.picture }));
+      } catch (err: any) {
+        if (err.response.data.statusCode === 413)
+          setUploadPictureError('Peso máximo de 2mb');
+      }
+
+      setIsUploadingPicture(false);
+    },
+    [auth],
+  );
+
   if (!auth.user) return <></>;
   return (
     <>
@@ -68,13 +101,41 @@ const Account: Page = () => {
       <ProfileNav />
 
       <div className="max-width mt-10">
-        <div className="flex justify-center md:max-w-sm mb-8">
-          <Image
-            src={auth.user.picture || '/no-picture.svg'}
-            width={96}
-            height={96}
-            className="rounded-full"
-          />
+        <div className="flex flex-col items-center md:max-w-sm mb-8">
+          <div className="relative">
+            <Image
+              src={auth.user.picture || '/no-picture.svg'}
+              width={96}
+              height={96}
+              className="rounded-full"
+            />
+            {isUploadingPicture && (
+              <div className="absolute top-0 flex items-center justify-center h-24 w-24 rounded-full z-10 bg-gray3-opaque">
+                <span className="text-white text-lg">...</span>
+              </div>
+            )}
+            <label
+              htmlFor="upload"
+              className="absolute cursor-pointer bottom-2 right-0 p-1.5 bg-primary text-white rounded-full z-20"
+            >
+              <MdCameraAlt size={16} />
+              <input
+                id="upload"
+                type="file"
+                name="picture"
+                accept=".png,.jpeg,.jpg"
+                disabled={isUploadingPicture}
+                className="hidden"
+                onChange={uploadPicture}
+              />
+            </label>
+          </div>
+          {uploadPictureError && (
+            <div className="flex items-center bg-red-opaque text-red px-1 rounded mt-2">
+              <MdError size={16} />
+              <p className="ml-2">{uploadPictureError}</p>
+            </div>
+          )}
         </div>
 
         <ul className="md:max-w-sm">
