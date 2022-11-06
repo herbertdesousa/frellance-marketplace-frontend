@@ -28,7 +28,7 @@ const ListDetailsInfoAnalytics: Page<{ data: Analytics; itemId: string }> = ({
   return (
     <div
       className="
-        fixed md:sticky p-4 border border-gray0.5 bg-white z-50
+        fixed md:sticky p-4 border border-gray0.5 bg-white z-40
         left-0 bottom-0 right-0 md:top-6 md:mt-6
       "
     >

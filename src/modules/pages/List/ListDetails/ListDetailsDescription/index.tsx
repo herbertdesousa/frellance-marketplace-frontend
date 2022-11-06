@@ -3,7 +3,6 @@ import { Page } from '@/types/Page';
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { MdKeyboardArrowDown } from 'react-icons/md';
 import { BreadCrumb } from '@/components';
 
 import { ItemDetails, ItemDetailsAttribute } from '@/pages/itens/detalhes/[id]';
@@ -73,11 +72,7 @@ const ListDetailsDescription: Page<{ item: ItemDetails }> = ({ item }) => {
 
       <ListDetailsDescriptionBlock description={item.description} />
 
-      <ul>
-        {sortedAttributes.map(attr => (
-          <ListDetailsDescriptionAttr key={attr.class} item={attr} />
-        ))}
-      </ul>
+      <ListDetailsDescriptionAttr attrs={sortedAttributes} />
     </div>
   );
 };

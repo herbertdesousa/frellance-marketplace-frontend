@@ -5,25 +5,27 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import { SortedAttribute } from '..';
 
-const ListDetailsDescriptionAttr: Page<{ item: SortedAttribute }> = ({
-  item,
+const ListDetailsDescriptionAttr: Page<{ attrs: SortedAttribute[] }> = ({
+  attrs,
 }) => {
   const [isOpened, setIsOpened] = useState(true);
 
   const allAttrNames = useMemo(() => {
-    return item.attributes.map(attr => attr.name);
-  }, [item.attributes]);
+    return attrs.flatMap(item => {
+      return item.attributes.map(attr => attr.name);
+    });
+  }, [attrs]);
 
   const allAttrValues = useMemo(() => {
-    return item.attributes.map(attr => attr.value);
-  }, [item.attributes]);
+    return attrs.flatMap(item => {
+      return item.attributes.map(attr => attr.value);
+    });
+  }, [attrs]);
 
   return (
-    <li className="mt-8">
+    <div className="mt-8">
       <div className="flex">
-        <h3 className="font-merriweather font-bold text-lg mr-2">
-          {item.class}
-        </h3>
+        <h3 className="font-merriweather font-bold text-lg mr-2">Detalhes</h3>
         <button type="button" onClick={() => setIsOpened(st => !st)}>
           <MdKeyboardArrowDown
             size={18}
@@ -33,25 +35,27 @@ const ListDetailsDescriptionAttr: Page<{ item: SortedAttribute }> = ({
           />
         </button>
       </div>
-      {isOpened && (
-        <div className="flex w-full justify-between mt-2">
-          <ul>
-            {allAttrNames.map(attr => (
-              <li key={attr} className="text-gray3">
-                {attr}
-              </li>
-            ))}
-          </ul>
-          <ul className="text-right">
-            {allAttrValues.map(attr => (
-              <li key={attr} className="font-medium">
-                {attr}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </li>
+      <ul>
+        {isOpened && (
+          <li className="flex w-full justify-between mt-2 md:justify-start">
+            <ul className="md:mr-48">
+              {allAttrNames.map(attr => (
+                <li key={attr} className="text-gray3">
+                  {attr}
+                </li>
+              ))}
+            </ul>
+            <ul className="text-right md:text-left">
+              {allAttrValues.map(attr => (
+                <li key={attr} className="font-medium">
+                  {attr}
+                </li>
+              ))}
+            </ul>
+          </li>
+        )}
+      </ul>
+    </div>
   );
 };
 
