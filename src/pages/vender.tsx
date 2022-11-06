@@ -106,7 +106,7 @@ const Account: Page = () => {
           headers: { 'Content-Type': 'multipart/form-data' },
         });
 
-        // router.push('/perfil/anuncios');
+        router.push('/perfil/anuncios');
         actions.setSubmitting(false);
       } catch (err) {
         console.log(err);
