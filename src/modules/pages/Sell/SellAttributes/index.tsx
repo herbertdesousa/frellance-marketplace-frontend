@@ -4,8 +4,12 @@ import { useFormikContext } from 'formik';
 
 import useSWR from 'swr';
 
-import { FormData } from '@/pages/vender';
-import { useCallback, useEffect, useState } from 'react';
+import {
+  FormData,
+  SELL_MIN_DESCRIPTION,
+  SELL_MIN_IMAGES,
+} from '@/pages/vender';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import SellAttributesItem from './SellAttributesItem';
 
@@ -40,6 +44,7 @@ const SellAttributes: Page = () => {
 
   const attributes = useSWR<Attribute[]>(
     values.category_id && `/categories/attributes?id=${values.category_id}`,
+    { revalidateOnFocus: false },
   );
 
   const [sortedAttributes, setSortedAttributes] = useState<SortedAttribute[]>(
@@ -79,7 +84,25 @@ const SellAttributes: Page = () => {
     [setErrors, setTouched, setValues],
   );
 
-  if (!values.category_id) return <></>;
+  const showAttributes = useMemo(() => {
+    return (
+      values.imgs.length >= SELL_MIN_IMAGES &&
+      values.name &&
+      values.description.length >= SELL_MIN_DESCRIPTION &&
+      values.price.type &&
+      values.price.value &&
+      values.category_id
+    );
+  }, [
+    values.description,
+    values.imgs.length,
+    values.name,
+    values.price.type,
+    values.price.value,
+    values.category_id,
+  ]);
+
+  if (!showAttributes) return <></>;
   if (!attributes.data) return <p>Carregando Atributos...</p>;
   return (
     <div className="mt-8">

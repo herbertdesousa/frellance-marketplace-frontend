@@ -7,7 +7,12 @@ import { useFormikContext } from 'formik';
 import { useCategories } from '@/hooks/categories';
 import { useModal } from '@/hooks/modal';
 import { Button } from '@/components';
-import { FormData } from '@/pages/vender';
+
+import {
+  FormData,
+  SELL_MIN_DESCRIPTION,
+  SELL_MIN_IMAGES,
+} from '@/pages/vender';
 
 const SellCategories: Page = () => {
   const { values, setFieldValue, touched, errors } =
@@ -63,9 +68,9 @@ const SellCategories: Page = () => {
 
   const showCategories = useMemo(() => {
     return (
-      values.imgs.length === 5 &&
+      values.imgs.length >= SELL_MIN_IMAGES &&
       values.name &&
-      values.description &&
+      values.description.length >= SELL_MIN_DESCRIPTION &&
       values.price.type &&
       values.price.value
     );
