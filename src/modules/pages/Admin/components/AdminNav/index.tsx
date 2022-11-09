@@ -4,7 +4,12 @@ import { useRouter } from 'next/router';
 
 import { MdChevronLeft } from 'react-icons/md';
 
-const AdminNav: React.FC<{ title: string }> = ({ title }) => {
+interface Props {
+  title: string;
+  onBack?(): void;
+}
+
+const AdminNav: React.FC<Props> = ({ title, onBack }) => {
   const router = useRouter();
 
   return (
@@ -12,7 +17,10 @@ const AdminNav: React.FC<{ title: string }> = ({ title }) => {
       <button
         type="button"
         className="p-1.5 bg-white rounded-full md:border border-gray1"
-        onClick={() => router.back()}
+        onClick={() => {
+          if (onBack) onBack();
+          else router.back();
+        }}
       >
         <MdChevronLeft size={24} />
       </button>

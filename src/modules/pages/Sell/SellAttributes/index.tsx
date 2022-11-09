@@ -11,27 +11,8 @@ import {
 } from '@/pages/vender';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { Attribute } from '@/types/Attributes';
 import SellAttributesItem from './SellAttributesItem';
-
-type AttributesBase = {
-  attributes_id: string;
-  required: boolean;
-  order: number;
-  name: string;
-  description: string;
-  class: string;
-};
-type AttributeWritable = {
-  type: 'writable';
-} & AttributesBase;
-type AttributeSelectableOrBoth = {
-  type: 'selectable' | 'both';
-  values: {
-    id: string;
-    name: string;
-  }[];
-} & AttributesBase;
-export type Attribute = AttributeWritable | AttributeSelectableOrBoth;
 
 export interface SortedAttribute {
   class: string;
@@ -55,15 +36,15 @@ const SellAttributes: Page = () => {
     if (attributes.data) {
       const sorted: SortedAttribute[] = [];
 
-      attributes.data.map(attr => {
-        const findedSort = sorted.find(item => item.class === attr.class);
-        if (findedSort) {
-          findedSort.attributes.push(attr);
-          findedSort.attributes.sort((a, b) => a.order - b.order);
-        } else sorted.push({ class: attr.class, attributes: [attr] });
+      // attributes.data.map(attr => {
+      //   const findedSort = sorted.find(item => item.class === attr.class);
+      //   if (findedSort) {
+      //     findedSort.attributes.push(attr);
+      //     findedSort.attributes.sort((a, b) => a.order - b.order);
+      //   } else sorted.push({ class: attr.class, attributes: [attr] });
 
-        return attr;
-      });
+      //   return attr;
+      // });
 
       setSortedAttributes(sorted);
       addRequiredAttributesToAttributesField(attributes.data);
@@ -76,7 +57,7 @@ const SellAttributes: Page = () => {
         ...st,
         attributes: dt
           .filter(item => item.required)
-          .map(item => ({ id: item.attributes_id, value: '', required: true })),
+          .map(item => ({ id: item.id, value: '', required: true })),
       }));
       setErrors({ attributes: undefined });
       setTouched({ attributes: undefined });

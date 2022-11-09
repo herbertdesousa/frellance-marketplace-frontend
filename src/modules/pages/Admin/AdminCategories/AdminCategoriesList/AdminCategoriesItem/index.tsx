@@ -6,7 +6,8 @@ import { useModal } from '@/hooks/modal';
 
 import { FiTrash2 } from 'react-icons/fi';
 import { adminApi } from '@/services/api';
-import { AdminCategory } from '..';
+
+import { AdminCategory } from '@/types/AdminCategory';
 
 interface Props {
   item: AdminCategory;

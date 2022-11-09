@@ -15,7 +15,7 @@ import { FiTrash2 } from 'react-icons/fi';
 import * as Yup from 'yup';
 
 import Image from 'next/image';
-import { AdminCategory } from '..';
+import { AdminCategory } from '@/types/AdminCategory';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('obrigatório'),
@@ -91,7 +91,7 @@ const AdminCategoriesSave: React.FC<Props> = ({ refreshData, item }) => {
         name: item?.name || '',
         relevance: String(item?.relevance) || '',
         img: item?.img_url || undefined,
-        iconName: functionName(item?.Icon) || '',
+        iconName: item ? functionName(item.Icon) : '',
       }}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
@@ -141,9 +141,9 @@ const AdminCategoriesSave: React.FC<Props> = ({ refreshData, item }) => {
                 htmlFor="upload"
                 // className="absolute cursor-pointer bottom-2 right-0 p-1.5 bg-primary text-white rounded-full z-20"
                 className="
-              flex items-center justify-center border border-dashed border-gray1 p-2 cursor-pointer text-black
-              transition hover:border-gray2
-            "
+            flex items-center justify-center border border-dashed border-gray1 p-2 cursor-pointer text-black
+            transition hover:border-gray2
+          "
               >
                 <MdCameraAlt size={24} className="mr-2" />
                 Selecionar Imagem
@@ -190,9 +190,9 @@ const AdminCategoriesSave: React.FC<Props> = ({ refreshData, item }) => {
             {!values.iconName && (
               <ul
                 className="
-                  grid grid-cols-8 md:grid-cols-12 gap-y-2 max-h-32 overflow-scroll
-                  no-scroll border border-gray1 p-2
-                "
+                grid grid-cols-8 md:grid-cols-12 gap-y-2 max-h-32 overflow-scroll
+                no-scroll border border-gray1 p-2
+              "
               >
                 {Object.entries(Icons).map(([name, Icon]) => (
                   <button

@@ -34,7 +34,7 @@ const SellAttributesItem: Page<SortedAttribute> = ({
         <ul>
           {attributes.map(attr => (
             <SellAttributesItemAttr
-              key={attr.attributes_id}
+              key={attr.id}
               isEditingId={{ state: isEditingId, set: setIsEditingId }}
               attr={attr}
             />

@@ -5,9 +5,10 @@ import { Dispatch, SetStateAction, useCallback, useMemo } from 'react';
 
 import { Radio, TextField } from '@/components';
 
+import { Attribute } from '@/types/Attributes';
+
 import { FormData } from '@/pages/vender';
 import { MdClose } from 'react-icons/md';
-import { Attribute } from '../..';
 
 type Props = {
   isEditingId: {
@@ -22,23 +23,23 @@ const SellAttributesItemAttr: Page<Props> = ({ isEditingId, attr }) => {
 
   const onClickEdit = useCallback(() => {
     setValues(st => {
-      if (st.attributes.find(item => item.id === attr.attributes_id)) return st;
+      if (st.attributes.find(item => item.id === attr.id)) return st;
 
       return {
         ...st,
         attributes: [
           ...st.attributes,
-          { id: attr.attributes_id, value: '', required: attr.required },
+          { id: attr.id, value: '', required: attr.required },
         ],
       };
     });
 
-    isEditingId.set(attr.attributes_id);
+    isEditingId.set(attr.id);
   }, [attr, isEditingId, setValues]);
 
   const value = useMemo(() => {
     const fieldValue = values.attributes.find(
-      item => item.id === attr.attributes_id,
+      item => item.id === attr.id,
     )?.value;
 
     if (!fieldValue) return undefined;
@@ -52,8 +53,8 @@ const SellAttributesItemAttr: Page<Props> = ({ isEditingId, attr }) => {
   }, [attr, values.attributes]);
 
   const fieldIndex = useMemo(() => {
-    return values.attributes.findIndex(item => item.id === attr.attributes_id);
-  }, [attr.attributes_id, values.attributes]);
+    return values.attributes.findIndex(item => item.id === attr.id);
+  }, [attr.id, values.attributes]);
 
   const fieldErrors = useMemo(() => {
     return (
@@ -66,7 +67,7 @@ const SellAttributesItemAttr: Page<Props> = ({ isEditingId, attr }) => {
 
   return (
     <li className="mb-1">
-      {isEditingId.state !== attr.attributes_id && (
+      {isEditingId.state !== attr.id && (
         <button
           type="button"
           className={`
@@ -97,7 +98,7 @@ const SellAttributesItemAttr: Page<Props> = ({ isEditingId, attr }) => {
           </div>
         </button>
       )}
-      {isEditingId.state === attr.attributes_id && (
+      {isEditingId.state === attr.id && (
         <div className="rounded border border-gray2">
           <div className="flex justify-between items-center py-2 px-4 border-b border-b-gray1">
             <strong className="font-medium">{attr.name}</strong>
