@@ -1,0 +1,32 @@
+.root {
+  width: calc(100% - 16px);
+  max-height: 85%;
+  @apply fixed p-6 bg-white z-50 md:w-96 overflow-scroll
+}
+.root-close {
+  top: -100px;
+  transition: all 50ms linear;
+}
+.root-open {
+  top: 8px;
+
+  transition: all 50ms linear;
+}
+@media (min-width: 1024px) {
+  .root-open {
+    top: 5vh;
+  }
+}
+
+
+.bg {
+  @apply fixed top-0 w-screen h-screen bg-black-opaque z-40
+}
+.bg-open {
+  opacity: 1;
+  transition: all 100ms linear;
+}
+.bg-close {
+  opacity: 0;
+  transition: all 100ms linear;
+}

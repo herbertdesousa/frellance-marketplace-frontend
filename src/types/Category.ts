@@ -6,4 +6,5 @@ export interface Category {
   Icon: IconType;
   img_url: string;
   slug: string;
+  relevance: number;
 }

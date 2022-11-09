@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { Page } from '@/types/Page';
 
-import Modal, { ModalProps, ModalRef } from '@/components/Modal';
+import Modal, { ModalProps, ModalRef } from '@/modules/hooks/Modal';
 
 const ModalContext = createContext<ModalType>({} as ModalType);
 

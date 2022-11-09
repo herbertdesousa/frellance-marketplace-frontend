@@ -28,6 +28,13 @@ const AdminHome: Page = () => {
           >
             Contatos
           </Button>
+          <Button
+            variant="outline"
+            className="mt-2"
+            onClick={() => router.push('/admin/categories')}
+          >
+            Categorias
+          </Button>
         </div>
       </div>
     </div>
