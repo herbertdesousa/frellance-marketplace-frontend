@@ -68,76 +68,85 @@ const AdminCategoryDetails: React.FC<Props> = ({ item, back, refreshData }) => {
   );
 
   return (
-    <div className="relative max-width md:max-w-md">
-      <AdminNav title="Categorias" onBack={back} />
+    <div className="relative max-width">
+      <div className="md:max-w-md">
+        <AdminNav title="Categorias" onBack={back} />
 
-      <div>
-        <h2 className="text-lg font-merriweather font-bold mb-2">Geral</h2>
-        <ul>
-          <li className="flex justify-between">
-            <strong className="font-medium">Imagem</strong>
-            <Image src={item.img_url} height={96} width={96} />
-          </li>
-          <li className="flex justify-between mt-1">
-            <strong className="font-medium">Nome</strong>
-            <span>{item.name}</span>
-          </li>
-          <li className="flex justify-between mt-1">
-            <strong className="font-medium">Ordem</strong>
-            <span>{item.relevance}</span>
-          </li>
-          <li className="flex justify-between mt-1">
-            <strong className="font-medium">Rota</strong>
-            <span>{`/${item.slug}`}</span>
-          </li>
-          <li className="flex justify-between mt-1">
-            <strong className="font-medium">Icone</strong>
-            <item.Icon size={18} />
-          </li>
-        </ul>
+        <div>
+          <h2 className="text-lg font-merriweather font-bold mb-2">Geral</h2>
+          <ul>
+            <li className="flex justify-between">
+              <strong className="font-medium">Imagem</strong>
+              <Image
+                src={item.img_url}
+                height={96}
+                width={96}
+                objectFit="cover"
+              />
+            </li>
+            <li className="flex justify-between mt-1">
+              <strong className="font-medium">Nome</strong>
+              <span>{item.name}</span>
+            </li>
+            <li className="flex justify-between mt-1">
+              <strong className="font-medium">Ordem</strong>
+              <span>{item.relevance}</span>
+            </li>
+            <li className="flex justify-between mt-1">
+              <strong className="font-medium">Rota</strong>
+              <span>{`/${item.slug}`}</span>
+            </li>
+            <li className="flex justify-between mt-1">
+              <strong className="font-medium">Icone</strong>
+              <item.Icon size={18} />
+            </li>
+          </ul>
 
-        <Button className="mt-2" variant="outline" onClick={editCategory}>
-          Alterar Categoria
-        </Button>
-      </div>
+          <Button className="mt-2" variant="outline" onClick={editCategory}>
+            Alterar Categoria
+          </Button>
+        </div>
 
-      <div className="mt-8">
-        <h2 className="text-lg font-merriweather font-bold mb-2">Atributos</h2>
-        <ul className="w-full border border-gray2">
-          {attributes.data &&
-            attributes.data
-              .sort((a, b) => b.order - a.order)
-              .map((attr, index) => (
-                <li
-                  className={`flex items-center justify-between w-full p-2 pr-3
-                  ${index === 0 ? '' : 'mt-1 border-t border-gray2'}`}
-                  key={attr.id}
-                >
-                  <strong className="font-medium">{attr.name}</strong>
+        <div className="mt-8">
+          <h2 className="text-lg font-merriweather font-bold mb-2">
+            Atributos
+          </h2>
+          <ul className="w-full border border-gray2">
+            {attributes.data &&
+              attributes.data
+                .sort((a, b) => b.order - a.order)
+                .map((attr, index) => (
+                  <li
+                    className={`flex items-center justify-between w-full p-2 pr-3
+                    ${index === 0 ? '' : 'mt-1 border-t border-gray2'}`}
+                    key={attr.id}
+                  >
+                    <strong className="font-medium">{attr.name}</strong>
 
-                  <div className="flex items-center">
-                    <button type="button" onClick={() => saveAttribute(attr)}>
-                      <FiEdit size={18} />
-                    </button>
-                    <button
-                      type="button"
-                      className="ml-4"
-                      onClick={() => deleteAttribute(attr.id)}
-                      disabled={deletingAttrId === attr.id}
-                    >
-                      <FiTrash2 size={18} />
-                    </button>
-                  </div>
-                </li>
-              ))}
-        </ul>
-        <Button
-          className="mt-2"
-          variant="outline"
-          onClick={() => saveAttribute()}
-        >
-          Adicionar Atributos
-        </Button>
+                    <div className="flex items-center">
+                      <button type="button" onClick={() => saveAttribute(attr)}>
+                        <FiEdit size={18} />
+                      </button>
+                      <button
+                        type="button"
+                        className="ml-4"
+                        onClick={() => deleteAttribute(attr.id)}
+                        disabled={deletingAttrId === attr.id}
+                      >
+                        <FiTrash2 size={18} />
+                      </button>
+                    </div>
+                  </li>
+                ))}
+          </ul>
+          <Button
+            className="mt-2"
+            variant="outline"
+            onClick={() => saveAttribute()}
+          >
+            Adicionar Atributos
+          </Button>
+        </div>
       </div>
     </div>
   );
