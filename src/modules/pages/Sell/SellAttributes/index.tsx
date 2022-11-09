@@ -28,25 +28,8 @@ const SellAttributes: Page = () => {
     { revalidateOnFocus: false },
   );
 
-  const [sortedAttributes, setSortedAttributes] = useState<SortedAttribute[]>(
-    [],
-  );
-
   useEffect(() => {
     if (attributes.data) {
-      const sorted: SortedAttribute[] = [];
-
-      // attributes.data.map(attr => {
-      //   const findedSort = sorted.find(item => item.class === attr.class);
-      //   if (findedSort) {
-      //     findedSort.attributes.push(attr);
-      //     findedSort.attributes.sort((a, b) => a.order - b.order);
-      //   } else sorted.push({ class: attr.class, attributes: [attr] });
-
-      //   return attr;
-      // });
-
-      setSortedAttributes(sorted);
       addRequiredAttributesToAttributesField(attributes.data);
     }
   }, [attributes.data]);
@@ -83,6 +66,8 @@ const SellAttributes: Page = () => {
     values.category_id,
   ]);
 
+  const [isEditingId, setIsEditingId] = useState('');
+
   if (!showAttributes) return <></>;
   if (!attributes.data) return <p>Carregando Atributos...</p>;
   return (
@@ -90,9 +75,17 @@ const SellAttributes: Page = () => {
       <h2 className="text-lg font-semibold mb-4">Atributos</h2>
 
       <ul>
-        {sortedAttributes.map(item => (
-          <SellAttributesItem key={item.class} {...item} />
-        ))}
+        {attributes.data &&
+          attributes.data.map(item => (
+            <SellAttributesItem
+              key={item.id}
+              attr={item}
+              isEditingId={{
+                set: setIsEditingId,
+                state: isEditingId,
+              }}
+            />
+          ))}
       </ul>
     </div>
   );
