@@ -4,5 +4,4 @@ export interface Item {
   name: string;
   description: string;
   price: string;
-  address: { city: string; state: string };
 }

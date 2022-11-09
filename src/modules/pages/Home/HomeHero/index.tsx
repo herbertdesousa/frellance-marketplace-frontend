@@ -67,7 +67,7 @@ const HomeHero: Page<{ data: Item[] }> = ({ data }) => {
           Itens Brasileiros
         </h1>
         <p className="text-sm text-gray1 mt-3">
-          {`Localizado em ${selectedItem.address.city} - ${selectedItem.address.state}`}
+          {`Preço ${selectedItem.price}`}
         </p>
 
         <div className="flex items-end justify-between mt-16 mb-6">
