@@ -89,7 +89,12 @@ const HomeFooter: Page = () => {
       <div className="w-full bg-gray3 rounded my-6" style={{ height: 1 }} />
 
       <div className="flex items-center">
-        <Image src="/logo/white.png" height={64} width={64} objectFit="cover" />
+        <Image
+          src="/logo/white.png"
+          height={38}
+          width={194}
+          objectFit="cover"
+        />
         <p className="text-white ml-4 text-xs">Copyright © 2022 Premium List</p>
       </div>
     </footer>

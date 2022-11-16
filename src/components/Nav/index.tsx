@@ -52,8 +52,8 @@ const Nav: Page<Props> = ({ children, variant = 'transparent', className }) => {
           <Link href="/">
             <Image
               src={variant === 'white' ? '/logo/black.png' : '/logo/white.png'}
-              height={64}
-              width={64}
+              height={38}
+              width={194}
               objectFit="cover"
             />
           </Link>
